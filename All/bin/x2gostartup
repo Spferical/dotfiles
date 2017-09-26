@@ -1,0 +1,9 @@
+#!/bin/sh
+
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+export LANG=en_US.utf8
+OS=`uname -s`
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+. $HOME/.profile
+exec i3 >> ~/x2golog 2>&1

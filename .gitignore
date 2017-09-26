@@ -1,0 +1,32 @@
+Anki
+Pictures
+.thunderbird
+.angband
+*.elc
+history
+.ninja_ide
+.task
+*~
+archives
+All/.vim/bundle
+All/.config/ranger/bookmarks
+__pycache__
+All/.config/zim/accelmap
+.fonts
+
+# MPD
+log
+state
+pid
+All/.config/mpd/database
+All/.config/mpd/sticker.sql
+All/.config/mpd/playlists/
+All/.config/ranger/tagged
+
+# ncmpcpp
+error.log
+.dwarffortress
+.kobodlrc
+.openttd
+.powder
+.qjoypad3

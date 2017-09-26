@@ -1,0 +1,118 @@
+#!/usr/bin/env python
+"""Calculates the cost of buying more farms in The Grid.
+(http://codeelf.com/games/the-grid-2/grid/)"""
+import argparse
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import re
+
+
+NUM_COLUMNS_IN_GRID_TABLE = 22
+
+
+def get_ranks_table():
+    page = urlopen("http://codeelf.com/games/the-grid-2/grid/ranks/")
+    soup = BeautifulSoup(page)
+    data = []
+    for row in soup.findAll("tr"):
+        all_tds = row.findAll("td")
+        data_row = []
+        for td in all_tds:
+            span = td.find("span")
+            if span:
+                data_row.append(span.string)
+            else:
+                val = td.renderContents().strip()
+                num = parse_number(val)
+                if num is not None:
+                    data_row.append(num)
+                else:
+                    data_row.append(val)
+        if len(data_row) == NUM_COLUMNS_IN_GRID_TABLE:
+            data.append(data_row)
+    return data
+
+
+def parse_number(x):
+    if x == b'NA':
+        return 0
+    try:
+        # remove commas from numbers and try parsing as float
+        x = float(re.sub(b"[^\d\.]", b"", x))
+        if x.is_integer():
+            x = int(x)
+        return x
+    except ValueError:
+        pass
+    except TypeError:
+        pass
+
+
+def main():
+    """Parse args and do the math."""
+    parser = argparse.ArgumentParser(
+        description="Calculate the cost of buying more farms in The Grid.")
+    subparsers = parser.add_subparsers(dest="command")
+
+    cost_calc_parser = subparsers.add_parser(
+        "cost", help="calculate costs")
+    cost_calc_parser.add_argument(
+        "farms", type=int, help="How many farms you already have.")
+    cost_calc_parser.add_argument(
+        "-c", "--cost", type=int, help="The cost of buying a farm.",
+        default=100)
+    cost_calc_parser.add_argument(
+        "-t", "--till", type=int, help="The # of farms to output up to",
+        default=20)
+
+    wizard_parser = subparsers.add_parser(
+        "wiz", help="Calculate when to buy a wizard")
+    wizard_parser.add_argument(
+        "wizards", type=int, help="How many wizards you already have.")
+
+    til_parser = subparsers.add_parser(
+        "til", help="Calculate how many farms you can buy.")
+    til_parser.add_argument(
+        "farms", type=int, help="How many farms you already have.")
+    til_parser.add_argument(
+        "gold", type=int, help="How much gold you have.")
+    til_parser.add_argument(
+        "-c", "--cost", type=int, help="The cost of buying a farm.",
+        default=100)
+
+    units_parser = subparsers.add_parser(
+        "units", help="Total units on the grid")
+
+    args = vars(parser.parse_args())
+    if args['command'] == 'cost':
+        farms = args['farms']
+        cost = args['cost']
+        till = args['till']
+        price = 0
+        for i in range(till):
+            price += (farms + i + 1) * cost
+            print(i + 1, price)
+    elif args['command'] == 'wiz':
+        wizards = args['wizards']
+        farms = 1
+        while wizards / (100 * (farms + 1)) > 2 * farms * .7 / (5000000 * 2**wizards):
+            farms += 1
+        print(farms)
+    elif args['command'] == 'til':
+        farms = args['farms']
+        cost = args['cost']
+        gold = args['gold']
+        price = 0
+        num = 0
+        while gold > price:
+            num += 1
+            price += cost * (farms + num)
+        num -= 1
+        print(num)
+    elif args['command'] == 'units':
+        print("Getting ranks table...")
+        ranks = get_ranks_table()
+        print(sum(row[3] for row in ranks))
+
+if __name__ == '__main__':
+    main()

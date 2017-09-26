@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+function __prompt_command {
+    local EXIT="$?"
+    # If this is an xterm set the title to dir:user@host:dir
+    case "$TERM" in
+        xterm*|rxvt*)
+        # bname=$(basename "${PWD/$HOME/~}")
+        # echo -ne "\033]0;${bname}: ${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
+        echo -ne "\033]0;${USER}@${HOSTNAME}\007"
+        ;;
+        *)
+        ;;
+    esac
+
+    local BLUE="\[\033[01;34m\]"
+    local DARK_BLUE="\[\033[0;34m\]"
+    local CYAN="\[\033[01;36m\]"
+    local RED="\[\033[01;31m\]"
+    local GRAY="\[\033[0;37m\]"
+    local YELLOW="\[\033[0;33m\]"
+
+    local reset='\[\033[00m\]'
+    local deco=$reset'\[\033[0;37m\]' # gray color; use 0;90m for darker color
+    local prompt=$reset
+
+    local SSH_IP=$(echo $SSH_CLIENT | awk '{ print $1 }')
+    local SSH2_IP=$(echo $SSH2_CLIENT | awk '{ print $1 }')
+    if [ $SSH2_IP ] || [ $SSH_IP ] ; then
+        local SSH_FLAG="@\h"
+    fi
+
+    PS2="$deco>$prompt "
+    PS4='$deco+$prompt '
+
+    local TIME="$DARK_BLUE\t$deco"
+    local USER="$CYAN\u$YELLOW$SSH_FLAG$deco"
+    local WDIR="$BLUE\w$deco"
+    local EXIT="$RED$EXIT$deco"
+    PS1="$deco┌─[$TIME|$USER|$WDIR|$EXIT]\n$deco└─>\$$prompt "
+
+    # Reset color for command output
+    # (this one is invoked every time before a command is executed):
+    trap 'echo -ne "\e[0m"' DEBUG
+}
+
+PROMPT_COMMAND=__prompt_command
+
+# vim: set et ts=4 sw=4:

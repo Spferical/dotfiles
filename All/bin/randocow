@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#cowsay with random cow
+cow=`ls /usr/share/cows/ | sort -R | head -1`
+cowsay -f $cow "$1"
