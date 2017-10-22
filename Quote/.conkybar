@@ -30,8 +30,8 @@ conky.text = [[
   "full_text": "/ ${fs_free /}", \
   "color": ${if_match ${fs_free_perc /}<0.5}"\#ff2222"$else"\#50fc50"$endif \
  }, \
- ${if_up wlp0s18f2u4}{ \
-  "full_text": "${wireless_essid wlp0s18f2u4} ▲ ${upspeed wlp0s18f2u4} ▼ ${downspeed wlp0s18f2u4}", \
+ ${if_up wlp0s19f2u1}{ \
+  "full_text": "${wireless_essid wlp0s19f2u1} ▲ ${upspeed wlp0s19f2u1} ▼ ${downspeed wlp0s19f2u1}", \
   "color": "\#f8fc50" \
  }, \
  $endif${if_up enp4s0}{ \
