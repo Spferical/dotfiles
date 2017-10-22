@@ -125,7 +125,7 @@ function download_website() {
 
 alias gzim="gvim ~/Dropbox/Notebooks/Notes/"
 alias pe="ps -e"
-alias tmuxa='~/bin/tmx alpha'
+alias tmuxa='tmx alpha'
 alias l=ls
 alias lstr='ls --sort time --reverse'
 
