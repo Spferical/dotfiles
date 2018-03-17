@@ -30,3 +30,5 @@ error.log
 .openttd
 .powder
 .qjoypad3
+
+.emacs.d
