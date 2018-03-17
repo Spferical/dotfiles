@@ -38,8 +38,8 @@ conky.text = [[
   "full_text": " ${battery_short BAT1} ${battery_time BAT1}", \
   "color": ${if_match ${battery_percent BAT1}>10}"\#ffad33"$else"\#ff3333"$endif \
  }, \
- ${if_up wlp4s0}{ \
-  "full_text": "${wireless_essid wlp4s0} ▲ ${upspeed wlp4s0} ▼ ${downspeed wlp4s0}", \
+ ${if_up wlp3s0}{ \
+  "full_text": "${wireless_essid wlp3s0} ▲ ${upspeed wlp3s0} ▼ ${downspeed wlp3s0}", \
   "color": "\#f8fc50" \
  }, \
  $endif${if_up enp0s31f6}{ \
