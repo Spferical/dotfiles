@@ -18,6 +18,14 @@ Plugin 'roxma/nvim-completion-manager'
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
 Plugin 'roxma/nvim-cm-racer'
+Plugin 'heavenshell/vim-pydocstring'
+Plugin 'fatih/vim-go'
+Plugin 'let-def/vimbufsync'
+" TODO: switch back to the-lambda-church's repo when changes are merged
+Plugin 'bluelightning32/coquille'
+"Plugin 'xolox/vim-misc'
+"Plugin 'xolox/vim-lua-ftplugin'
+"Plugin 'the-lambda-church/coquille'
 call vundle#end()
 
 syntax on
@@ -109,9 +117,11 @@ nnoremap <leader>jc :JavaCorrect<CR>
 nnoremap <leader>jr :JavaRename<Space>
 
 "lua.vim
-let g:lua_complete_library = 0 " interferes with YouCompleteMe
-let g:lua_complete_dynamic = 0 " interferes with YouCompleteMe
-let g:deoplete#enable_at_startup = 1
+"let g:lua_complete_library = 0 " interferes with YouCompleteMe
+"let g:lua_complete_dynamic = 0 " interferes with YouCompleteMe
+"let g:deoplete#enable_at_startup = 1
+let g:lua_complete_omni = 1
+let g:lua_safe_omni_modules = 1
 
 " Neomake upon write
 "autocmd! BufWritePost * Neomake
@@ -122,3 +132,11 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 set hidden
 let g:racer_cmd = "/usr/bin/racer"
 let g:racer_experimental_completer = 1
+
+" nvim completion manager
+" close complation menu AND start new line with enter
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+"jedi
+"don't do stupid things like insta-insert the 'from' in 'import x from y'
+let g:jedi#smart_auto_mappings = 0
