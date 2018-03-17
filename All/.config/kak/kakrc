@@ -1,0 +1,7 @@
+colorscheme desertex
+
+hook global WinSetOption filetype=go %{
+    set window lintcmd kakgolint.sh
+    lint-enable
+    hook buffer BufWritePost .* lint
+}
