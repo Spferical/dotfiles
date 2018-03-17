@@ -223,9 +223,6 @@ bindsym $mod+Ctrl+i exec urxvt -e nvim ~/Sync/vimwiki/Ideas.wiki
 bindsym $mod+x exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
 
-# urxvt daemon
-exec --no-startup-id urxvtd
-
 # 0px Border Windows
 for_window [class="chrome"] border none
 for_window [class="Firefox"] border none
