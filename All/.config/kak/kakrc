@@ -1,5 +1,11 @@
 colorscheme desertex
 
+set global scrolloff 5,0
+
+def RemoveTrailingWhitespace %{
+    execute-keys "\%s\h+$<ret>d;"
+}
+
 hook global WinSetOption filetype=go %{
     set window lintcmd kakgolint.sh
     lint-enable
