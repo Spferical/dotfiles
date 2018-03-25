@@ -9,7 +9,11 @@ def RemoveTrailingWhitespace %{
 }
 
 hook global WinSetOption filetype=go %{
-    set window lintcmd kakgolint.sh
+    set window lintcmd "func() {
+        cp $1 $1.go &&
+        go tool vet $1.go 2>&1 |
+        sed -E 's/vet: .*: (.*):([0-9]+):([0-9]+): (.*)/\1:\2:\3: error: \4/'
+    } && func"
     lint-enable
     hook buffer BufWritePost .* lint
 }
