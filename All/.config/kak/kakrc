@@ -2,6 +2,8 @@ colorscheme desertex
 
 set global scrolloff 5,0
 
+add-highlighter global wrap -word -indent
+
 def RemoveTrailingWhitespace %{
     execute-keys "\%s\h+$<ret>d;"
 }
@@ -11,3 +13,7 @@ hook global WinSetOption filetype=go %{
     lint-enable
     hook buffer BufWritePost .* lint
 }
+
+# auto indent/dedent with tab in insert-mode
+map global insert <tab> '<a-;><gt>'
+map global insert <backtab> '<a-;><lt>'
