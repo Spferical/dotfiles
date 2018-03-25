@@ -12,8 +12,11 @@
 (setq shell-file-name "/bin/bash")
 
 (use-package evil
-	     :config
-	     (evil-mode 1))
+  :init
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-abbrev-expand-on-insert-exit nil)
+  :config
+  (evil-mode 1))
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode))
 (use-package company-coq
