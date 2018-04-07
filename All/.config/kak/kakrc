@@ -23,3 +23,10 @@ hook global WinSetOption filetype=go %{
 # auto indent/dedent with tab in insert-mode
 map global insert <tab> '<a-;><gt>'
 map global insert <backtab> '<a-;><lt>'
+
+hook global NormalKey y|d|c %{ nop %sh{
+  printf %s "$kak_reg_dquote" | xsel --input --clipboard
+}}
+
+map global user P '!xsel --output --clipboard<ret>'
+map global user p '<a-!>xsel --output --clipboard<ret>'
