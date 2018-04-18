@@ -12,8 +12,8 @@ def RemoveTrailingWhitespace %{
 
 hook global WinSetOption filetype=go %{
     set window lintcmd "func() {
-        cp $1 $1.go &&
-        go tool vet $1.go 2>&1 |
+        ln -s $1 $1.go &&
+        gometalinter $1.go 2>&1 |
         sed -E 's/vet: .*: (.*):([0-9]+):([0-9]+): (.*)/\1:\2:\3: error: \4/'
     } && func"
     lint-enable
