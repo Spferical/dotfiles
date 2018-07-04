@@ -14,18 +14,12 @@ Plugin 'vimwiki'
 Plugin 'tpope/vim-fugitive'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'roxma/nvim-completion-manager'
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
 Plugin 'roxma/nvim-cm-racer'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'fatih/vim-go'
 Plugin 'let-def/vimbufsync'
-" TODO: switch back to the-lambda-church's repo when changes are merged
-Plugin 'bluelightning32/coquille'
-"Plugin 'xolox/vim-misc'
-"Plugin 'xolox/vim-lua-ftplugin'
-"Plugin 'the-lambda-church/coquille'
 call vundle#end()
 
 syntax on
@@ -132,10 +126,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 set hidden
 let g:racer_cmd = "/usr/bin/racer"
 let g:racer_experimental_completer = 1
-
-" nvim completion manager
-" close complation menu AND start new line with enter
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
 "jedi
 "don't do stupid things like insta-insert the 'from' in 'import x from y'
