@@ -15,7 +15,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 #my editor
-export EDITOR="nvim"
+export EDITOR="kak"
 export VISUAL="$EDITOR"
 
 # favorite terminal
