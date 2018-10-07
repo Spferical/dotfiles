@@ -2,7 +2,7 @@ colorscheme desertex
 
 set global scrolloff 5,0
 
-set global termcmd 'xfce4-terminal -e '
+set global termcmd 'alacritty -e sh -c'
 
 add-highlighter global wrap -word -indent
 
