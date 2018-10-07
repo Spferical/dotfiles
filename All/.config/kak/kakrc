@@ -29,6 +29,10 @@ map global user p '<a-!>xsel --output --clipboard<ret>'
 
 map global normal <c-p> ':find '
 
+map global user h ':lsp-hover<ret>'
+
 def find -params 1 -shell-candidates %{ ag -l } %{ edit %arg{1} }
 
 ranger-open-on-edit-directory
+
+eval %sh{kak-lsp --kakoune -s $kak_session}
