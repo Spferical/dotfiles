@@ -4,7 +4,7 @@ set global scrolloff 5,0
 
 set global termcmd 'alacritty -e sh -c'
 
-add-highlighter global wrap -word -indent
+add-highlighter global/ wrap -word -indent
 
 def RemoveTrailingWhitespace %{
     execute-keys "\%s\h+$<ret>d;"
