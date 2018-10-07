@@ -163,3 +163,10 @@ dot () {
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
+
+# fzf
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+# Added by Krypton
+export GPG_TTY=$(tty)
