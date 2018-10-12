@@ -36,3 +36,5 @@ def find -params 1 -shell-candidates %{ ag -l } %{ edit %arg{1} }
 ranger-open-on-edit-directory
 
 eval %sh{kak-lsp --kakoune -s $kak_session}
+
+hook global BufCreate .* %{editorconfig-load}
