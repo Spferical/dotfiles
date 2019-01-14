@@ -11,7 +11,7 @@
 # set PATH so it includes user's private bin if it exists
 # and the dropbox distribution folder
 if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$HOME/bin/thirdparty:$HOME/.dropbox-dist:$PATH:$HOME/go/bin"
+    PATH="$HOME/bin:$HOME/bin/thirdparty:$HOME/.dropbox-dist:$PATH:$HOME/go/bin:$HOME/.cargo/bin:/home/matthew/node_modules/.bin/"
 fi
 
 #my editor

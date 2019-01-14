@@ -1,5 +1,5 @@
 HISTFILE=~/.histfile
-HISTSIZE=10000000000000
+HISTSIZE=100000000000000
 SAVEHIST=100000000000000000
 setopt appendhistory autocd extendedglob nomatch notify extendedhistory
 # vikeys

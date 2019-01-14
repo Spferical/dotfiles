@@ -65,7 +65,7 @@ URxvt*.foreground:  #e3e0d7
 URxvt*.background:  #1c1c1c
 
 ! Rofi
-rofi.font: terminus 18
+rofi.font: Inconsolata 20
 rofi.padding: 3
 rofi.lines: 7
 rofi.borderwidth: 1

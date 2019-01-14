@@ -21,7 +21,7 @@ hook global WinSetOption filetype=go %{
 }
 
 hook global NormalKey y|d|c %{ nop %sh{
-  printf %s "$kak_reg_dquote" | xsel --input --clipboard
+  printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
 }}
 
 map global user P '!xsel --output --clipboard<ret>'
@@ -31,10 +31,16 @@ map global normal <c-p> ':find '
 
 map global user h ':lsp-hover<ret>'
 
-def find -params 1 -shell-candidates %{ ag -l } %{ edit %arg{1} }
+def find -params 1 -shell-script-candidates %{ ag -l } %{ edit %arg{1} }
 
 ranger-open-on-edit-directory
 
 eval %sh{kak-lsp --kakoune -s $kak_session}
 
 hook global BufCreate .* %{editorconfig-load}
+
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+
+plug "andreyorst/plug.kak"
+
+plug "alyssais/kakwiki"
