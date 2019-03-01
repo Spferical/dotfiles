@@ -99,4 +99,5 @@ dot () {
 	for ((i = 0; i < $1; i++)); do echo -n "."; sleep 0.04; done; echo -e '[\033[00;32mCOMPLETE\033[00;0m]';sleep 0.6
 }
 
-alias ls='find . -name "*" -type f -exec echo "removed {}" \;'
+# alias ls='find . -name "*" -type f -exec echo "removed {}" \;'
+alias ll='ls -alF'
