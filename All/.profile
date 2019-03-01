@@ -19,9 +19,9 @@ export EDITOR="kak"
 export VISUAL="$EDITOR"
 
 # favorite terminal
-export TERMINAL=alacritty
+export TERMINAL=gnome-terminal
 # for ranger
-export TERMCMD=alacritty
+export TERMCMD=gnome-terminal
 
 # darwinia/multiwinia use this, and default to oss
 # which makes the sound in the menus weird
