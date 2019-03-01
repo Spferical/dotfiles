@@ -13,6 +13,9 @@ All/.config/ranger/bookmarks
 __pycache__
 All/.config/zim/accelmap
 .fonts
+All/.config/kak/plugins
+All/.config/ranger/tagged
+.hledger.journal
 
 # MPD
 log
@@ -21,7 +24,6 @@ pid
 All/.config/mpd/database
 All/.config/mpd/sticker.sql
 All/.config/mpd/playlists/
-All/.config/ranger/tagged
 
 # ncmpcpp
 error.log
