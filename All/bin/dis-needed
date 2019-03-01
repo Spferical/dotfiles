@@ -3,6 +3,7 @@
 have a 99% chance to discover a new square in The Grid.
 (http://codeelf.com/games/the-grid-2/grid/)"""
 import argparse
+from math import log, ceil
 
 
 def main():
@@ -12,14 +13,13 @@ def main():
         "to discover a new square in The Grid")
     parser.add_argument(
         "squares", type=int, help="The number of squares in the grid.")
+    parser.add_argument(
+        "--chance", type=float, help="Chance you want of discovering a square",
+        default=0.99)
     args = vars(parser.parse_args())
     squares = args['squares']
-    chance = 1 - 1 / squares
-    num_dis = 1
-    while chance > .01:
-        chance *= (1 - 1/squares)
-        num_dis += 1
-    print(num_dis)
+    chance = args['chance']
+    print(ceil(log(1 - chance, (1 - 1/squares))))
 
 if __name__ == '__main__':
     main()
