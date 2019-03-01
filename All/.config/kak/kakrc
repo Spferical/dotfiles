@@ -43,4 +43,16 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak"
 
-plug "alyssais/kakwiki"
+plug "TeddyDD/kakoune-wiki"
+wiki_setup "/home/matthew/Dropbox/vimwiki"
+
+plug "TeddyDD/kakoune-edit-or-dir" config %{
+    unalias global e edit
+    alias global e edit-or-dir
+}
+
+def MakeJournalNote %{
+    execute-keys %sh{
+        echo ":wiki journal/$(date +"%Y-%m-%d").md<ret>"
+    }
+}
