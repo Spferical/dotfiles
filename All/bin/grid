@@ -83,6 +83,12 @@ def main():
     units_parser = subparsers.add_parser(
         "units", help="Total units on the grid")
 
+    gamble_parser = subparsers.add_parser(
+        "gamble", help="Chance of getting amount by gambling")
+    gamble_parser.add_argument("starting_amount", type=int)
+    gamble_parser.add_argument("goal", type=int)
+    gamble_parser.add_argument("gamble_amount", type=int, default=1)
+
     args = vars(parser.parse_args())
     if args['command'] == 'cost':
         farms = args['farms']
@@ -113,6 +119,21 @@ def main():
         print("Getting ranks table...")
         ranks = get_ranks_table()
         print(sum(row[3] for row in ranks))
+    elif args['command'] == 'gamble':
+        # simple gambler's ruin model to see our chance of gambling up to a certain goal
+        starting_amount = args['starting_amount']
+        goal = args['goal']
+        gamble_amount = args['gamble_amount']
+        assert goal > starting_amount
+        p_win = (162 * gamble_amount - 79) / 320 / gamble_amount #81/160
+        p_loss = 1 - p_win
+        print(p_win)
+        print(p_loss)
+        starting_amount = starting_amount // gamble_amount
+        goal = goal // gamble_amount
+        p_ruin = (1 - (p_win / p_loss) ** (goal - starting_amount)) / (1 - (p_win / p_loss) ** goal)
+        print("Chance of ruin: {}".format(p_ruin))
+        print("Chance of victory: {}".format(1 - p_ruin))
 
 if __name__ == '__main__':
     main()
