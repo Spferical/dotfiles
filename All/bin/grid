@@ -3,8 +3,8 @@
 (http://codeelf.com/games/the-grid-2/grid/)"""
 import argparse
 from urllib.request import urlopen
-from bs4 import BeautifulSoup
 import re
+import random
 
 
 NUM_COLUMNS_IN_GRID_TABLE = 22
@@ -88,6 +88,8 @@ def main():
     gamble_parser.add_argument("starting_amount", type=int)
     gamble_parser.add_argument("goal", type=int)
     gamble_parser.add_argument("gamble_amount", type=int, default=1)
+    gamble_parser.add_argument("--monte_carlo", type=bool, default=False)
+    gamble_parser.add_argument("--energy", type=bool, default=False)
 
     args = vars(parser.parse_args())
     if args['command'] == 'cost':
@@ -120,20 +122,42 @@ def main():
         ranks = get_ranks_table()
         print(sum(row[3] for row in ranks))
     elif args['command'] == 'gamble':
-        # simple gambler's ruin model to see our chance of gambling up to a certain goal
         starting_amount = args['starting_amount']
         goal = args['goal']
         gamble_amount = args['gamble_amount']
         assert goal > starting_amount
-        p_win = (162 * gamble_amount - 79) / 320 / gamble_amount #81/160
-        p_loss = 1 - p_win
-        print(p_win)
-        print(p_loss)
-        starting_amount = starting_amount // gamble_amount
-        goal = goal // gamble_amount
-        p_ruin = (1 - (p_win / p_loss) ** (goal - starting_amount)) / (1 - (p_win / p_loss) ** goal)
-        print("Chance of ruin: {}".format(p_ruin))
-        print("Chance of victory: {}".format(1 - p_ruin))
+        if args['monte_carlo']:
+            p_win = 81/160
+            trials = 100000
+            wins = 0
+            for _ in range(trials):
+                money = starting_amount
+                while 0 < money < goal:
+                    bet = min(money - 1, gamble_amount)
+                    if random.random() < p_win:
+                        money += bet
+                    else:
+                        money -= bet + (1 if args['energy'] else 0)
+                if money >= goal:
+                    wins += 1
+            print(wins / trials)
+        else:
+            # simple gambler's ruin model to see our chance of gambling up to a certain goal
+            p_win = ((162 * gamble_amount - 79) / 320 / gamble_amount
+                     if args['energy'] else 81/160)
+            p_loss = 1 - p_win
+            starting_amount = starting_amount // gamble_amount
+            goal = goal // gamble_amount
+            if p_win == 0.5:
+                p_ruin = starting_amount / goal
+            else:
+                p_ruin = (1 - (p_win / p_loss) ** (goal - starting_amount)) / (1 - (p_win / p_loss) ** goal)
+            if p_win == 0.5:
+                expected_time = starting_amount * (goal - starting_amount)
+            else:
+                expected_time = starting_amount / (1 - 2 * p_win) - goal / (1 - 2 * p_win) * (((1 - p_win) / p_win) ** goal - 1) / (((1 - p_win) / p_win) ** goal - 1)
+            print("P(success): {}".format(1 - p_ruin))
+            print("ETA: {}".format(expected_time))
 
 if __name__ == '__main__':
     main()
