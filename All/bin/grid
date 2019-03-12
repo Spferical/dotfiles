@@ -1,163 +1,90 @@
 #!/usr/bin/env python
-"""Calculates the cost of buying more farms in The Grid.
+"""Calculates the cost of buying more farms in The Grid, and more.
 (http://codeelf.com/games/the-grid-2/grid/)"""
-import argparse
-from urllib.request import urlopen
-import re
+import click
 import random
 
 
-NUM_COLUMNS_IN_GRID_TABLE = 22
-
-
-def get_ranks_table():
-    page = urlopen("http://codeelf.com/games/the-grid-2/grid/ranks/")
-    soup = BeautifulSoup(page)
-    data = []
-    for row in soup.findAll("tr"):
-        all_tds = row.findAll("td")
-        data_row = []
-        for td in all_tds:
-            span = td.find("span")
-            if span:
-                data_row.append(span.string)
-            else:
-                val = td.renderContents().strip()
-                num = parse_number(val)
-                if num is not None:
-                    data_row.append(num)
-                else:
-                    data_row.append(val)
-        if len(data_row) == NUM_COLUMNS_IN_GRID_TABLE:
-            data.append(data_row)
-    return data
-
-
-def parse_number(x):
-    if x == b'NA':
-        return 0
-    try:
-        # remove commas from numbers and try parsing as float
-        x = float(re.sub(b"[^\d\.]", b"", x))
-        if x.is_integer():
-            x = int(x)
-        return x
-    except ValueError:
-        pass
-    except TypeError:
-        pass
-
-
+@click.group()
 def main():
-    """Parse args and do the math."""
-    parser = argparse.ArgumentParser(
-        description="Calculate the cost of buying more farms in The Grid.")
-    subparsers = parser.add_subparsers(dest="command")
+    pass
 
-    cost_calc_parser = subparsers.add_parser(
-        "cost", help="calculate costs")
-    cost_calc_parser.add_argument(
-        "farms", type=int, help="How many farms you already have.")
-    cost_calc_parser.add_argument(
-        "-c", "--cost", type=int, help="The cost of buying a farm.",
-        default=100)
-    cost_calc_parser.add_argument(
-        "-t", "--till", type=int, help="The # of farms to output up to",
-        default=20)
 
-    wizard_parser = subparsers.add_parser(
-        "wiz", help="Calculate when to buy a wizard")
-    wizard_parser.add_argument(
-        "wizards", type=int, help="How many wizards you already have.")
+@main.command()
+@click.argument("farms", type=int)
+@click.option("-c", "--cost", help="the cost of buying a farm", default=100)
+@click.option("-t", "--til", help="the # of farms to output up to", default=20)
+def cost(farms, cost, til):
+    price = 0
+    for i in range(til):
+        price += (farms + i + 1) * cost
+        print(i + 1, price)
 
-    til_parser = subparsers.add_parser(
-        "til", help="Calculate how many farms you can buy.")
-    til_parser.add_argument(
-        "farms", type=int, help="How many farms you already have.")
-    til_parser.add_argument(
-        "gold", type=int, help="How much gold you have.")
-    til_parser.add_argument(
-        "-c", "--cost", type=int, help="The cost of buying a farm.",
-        default=100)
 
-    units_parser = subparsers.add_parser(
-        "units", help="Total units on the grid")
+@main.command()
+@click.argument("wizards", type=int)
+def wiz(wizards):
+    farms = 1
+    while wizards / (100 * (farms + 1)) > 2 * farms * .7 / (5000000 * 2**wizards):
+        farms += 1
+    print(farms)
 
-    gamble_parser = subparsers.add_parser(
-        "gamble", help="Chance of getting amount by gambling")
-    gamble_parser.add_argument("starting_amount", type=int)
-    gamble_parser.add_argument("goal", type=int)
-    gamble_parser.add_argument("gamble_amount", type=int, default=1)
-    gamble_parser.add_argument("--monte_carlo", type=bool, default=False)
-    gamble_parser.add_argument("--energy", type=bool, default=False)
 
-    args = vars(parser.parse_args())
-    if args['command'] == 'cost':
-        farms = args['farms']
-        cost = args['cost']
-        till = args['till']
-        price = 0
-        for i in range(till):
-            price += (farms + i + 1) * cost
-            print(i + 1, price)
-    elif args['command'] == 'wiz':
-        wizards = args['wizards']
-        farms = 1
-        while wizards / (100 * (farms + 1)) > 2 * farms * .7 / (5000000 * 2**wizards):
-            farms += 1
-        print(farms)
-    elif args['command'] == 'til':
-        farms = args['farms']
-        cost = args['cost']
-        gold = args['gold']
-        price = 0
-        num = 0
-        while gold > price:
-            num += 1
-            price += cost * (farms + num)
-        num -= 1
-        print(num)
-    elif args['command'] == 'units':
-        print("Getting ranks table...")
-        ranks = get_ranks_table()
-        print(sum(row[3] for row in ranks))
-    elif args['command'] == 'gamble':
-        starting_amount = args['starting_amount']
-        goal = args['goal']
-        gamble_amount = args['gamble_amount']
-        assert goal > starting_amount
-        if args['monte_carlo']:
-            p_win = 81/160
-            trials = 100000
-            wins = 0
-            for _ in range(trials):
-                money = starting_amount
-                while 0 < money < goal:
-                    bet = min(money - 1, gamble_amount)
-                    if random.random() < p_win:
-                        money += bet
-                    else:
-                        money -= bet + (1 if args['energy'] else 0)
-                if money >= goal:
-                    wins += 1
-            print(wins / trials)
+@main.command()
+@click.argument("farms", type=int)
+@click.argument("gold")
+@click.option("-c", "--cost", default=100, help="base cost of buying a farm")
+def til(farms, gold, cost):
+    price = 0
+    num = 0
+    while gold > price:
+        num += 1
+        price += cost * (farms + num)
+    num -= 1
+    print(num)
+
+
+@main.command()
+@click.argument("starting_amount", type=int)
+@click.argument("goal", type=int)
+@click.argument("gamble_amount", default=1)
+@click.option("-m", "--monte_carlo", is_flag=True)
+@click.option("-e", "--energy", is_flag=True)
+def gamble(starting_amount, goal, gamble_amount, monte_carlo, energy):
+    assert goal > starting_amount
+    if monte_carlo:
+        p_win = 81/160
+        trials = 100000
+        wins = 0
+        for _ in range(trials):
+            money = starting_amount
+            while 0 < money < goal:
+                bet = min(money - 1, gamble_amount)
+                if random.random() < p_win:
+                    money += bet
+                else:
+                    money -= bet + (1 if energy else 0)
+            if money >= goal:
+                wins += 1
+        print(wins / trials)
+    else:
+        # simple gambler's ruin model to see our chance of gambling up to a certain goal
+        p_win = ((162 * gamble_amount - 79) / 320 / gamble_amount
+                 if energy else 81/160)
+        p_loss = 1 - p_win
+        starting_amount = starting_amount // gamble_amount
+        goal = goal // gamble_amount
+        if p_win == 0.5:
+            p_ruin = starting_amount / goal
         else:
-            # simple gambler's ruin model to see our chance of gambling up to a certain goal
-            p_win = ((162 * gamble_amount - 79) / 320 / gamble_amount
-                     if args['energy'] else 81/160)
-            p_loss = 1 - p_win
-            starting_amount = starting_amount // gamble_amount
-            goal = goal // gamble_amount
-            if p_win == 0.5:
-                p_ruin = starting_amount / goal
-            else:
-                p_ruin = (1 - (p_win / p_loss) ** (goal - starting_amount)) / (1 - (p_win / p_loss) ** goal)
-            if p_win == 0.5:
-                expected_time = starting_amount * (goal - starting_amount)
-            else:
-                expected_time = starting_amount / (1 - 2 * p_win) - goal / (1 - 2 * p_win) * (((1 - p_win) / p_win) ** goal - 1) / (((1 - p_win) / p_win) ** goal - 1)
-            print("P(success): {}".format(1 - p_ruin))
-            print("ETA: {}".format(expected_time))
+            p_ruin = (1 - (p_win / p_loss) ** (goal - starting_amount)) / (1 - (p_win / p_loss) ** goal)
+        if p_win == 0.5:
+            expected_time = starting_amount * (goal - starting_amount)
+        else:
+            expected_time = starting_amount / (1 - 2 * p_win) - goal / (1 - 2 * p_win) * (((1 - p_win) / p_win) ** goal - 1) / (((1 - p_win) / p_win) ** goal - 1)
+        print("P(success): {}".format(1 - p_ruin))
+        print("ETA: {}".format(expected_time))
+
 
 if __name__ == '__main__':
     main()
