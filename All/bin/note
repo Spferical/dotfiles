@@ -1,7 +1,0 @@
-filename=$HOME/Sync/vimwiki/$1.wiki
-# if the file doesn't exist yet, add it to the vimwiki index before editing
-if [[ ! -e filename ]]; then
-	echo "\n\t* [[$1]]" >> $HOME/Sync/vimwiki/index.wiki
-fi
-# edit the file
-vim $filename

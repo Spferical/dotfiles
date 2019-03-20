@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-hax "$(curl -s icanhazip.com)"
-echo ""
