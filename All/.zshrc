@@ -147,16 +147,8 @@ alias mpv="mpv --hwdec=auto --vo=opengl"
 
 alias t=task
 
-# to be funny, copied from the actual suicide-linux .deb
-# (shows up when you actually do install suicide-linux)
-echo " ========================================================="
-echo " WARNING: Suicide-Linux installed"
-echo "          (http://sourceforge.net/projects/suicide-linux/)"
-echo " ========================================================="
-
-
 dot () {
-	for ((i = 0; i < $1; i++)); do echo -n "."; sleep 0.04; done; echo -e '[\033[00;32mCOMPLETE\033[00;0m]';sleep 0.6
+	for ((i = 0; i < $1; i++)); do echo -n "."; sleep 0.04; done; echo -e '[\033[00;32mCOMPLETE\033[00;0m]'
 }
 
 # edit command in vim
@@ -170,3 +162,7 @@ source /usr/share/fzf/completion.zsh
 
 # Added by Krypton
 export GPG_TTY=$(tty)
+
+# mem use and page fault info for time
+# from burntsushi -- https://news.ycombinator.com/item?id=19525109
+TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
