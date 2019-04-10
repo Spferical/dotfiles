@@ -24,12 +24,12 @@ hook global NormalKey y|d|c %{ nop %sh{
   printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
 }}
 
-map global user P '!xsel --output --clipboard<ret>'
-map global user p '<a-!>xsel --output --clipboard<ret>'
+map global user P -docstring 'pastes x clipoard contents before the selection' '! xsel --output --clipboard<ret>'
+map global user p -docstring 'pastes x clipboard contents after the selection' '<a-!> xsel --output --clipboard<ret>'
 
 map global normal <c-p> ':find '
 
-map global user h ':lsp-hover<ret>'
+map global user -docstring 'displays lsp-hover info' h ': lsp-hover<ret>'
 
 def find -params 1 -shell-script-candidates %{ ag -l } %{ edit %arg{1} }
 
