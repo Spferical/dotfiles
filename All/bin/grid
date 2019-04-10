@@ -23,16 +23,32 @@ def cost(farms, cost, til):
 
 @main.command()
 @click.argument("wizards", type=int)
-def wiz(wizards):
-    farms = 1
-    while wizards / (100 * (farms + 1)) > 2 * farms * .7 / (5000000 * 2**wizards):
-        farms += 1
+@click.option("-c", "--cost", type=int, default=100)
+def wiz(wizards, cost):
+    def income(f, w):
+        # roughly proportional to actual grid income
+        return (1 + .7 * w) * f
+    def farm_cost(f):
+        # returns cost of buying the f+1th farm
+        return cost * (f + 1)
+    def wizard_cost(w):
+        # returns cost of buying the w+1th wizard
+        return 5_000_000 * 2 ** w
+    farms = 0
+    while True:
+        cur_income = income(farms, wizards)
+        farm_benefit = income(farms + 1, wizards) - cur_income
+        wiz_benefit = income(farms, wizards + 1) - cur_income
+        if farm_benefit / farm_cost(farms) > wiz_benefit / wizard_cost(wizards):
+            farms += 1
+        else:
+            break
     print(farms)
 
 
 @main.command()
 @click.argument("farms", type=int)
-@click.argument("gold")
+@click.argument("gold", type=int)
 @click.option("-c", "--cost", default=100, help="base cost of buying a farm")
 def til(farms, gold, cost):
     price = 0
@@ -50,7 +66,9 @@ def til(farms, gold, cost):
 @click.argument("gamble_amount", default=1)
 @click.option("-m", "--monte_carlo", is_flag=True)
 @click.option("-e", "--energy", is_flag=True)
-def gamble(starting_amount, goal, gamble_amount, monte_carlo, energy):
+@click.option("-c", "--chance", default=81/160)
+def gamble(starting_amount, goal, gamble_amount, monte_carlo, energy, chance):
+    p_win = chance
     assert goal > starting_amount
     if monte_carlo:
         p_win = 81/160
@@ -70,7 +88,7 @@ def gamble(starting_amount, goal, gamble_amount, monte_carlo, energy):
     else:
         # simple gambler's ruin model to see our chance of gambling up to a certain goal
         p_win = ((162 * gamble_amount - 79) / 320 / gamble_amount
-                 if energy else 81/160)
+                 if energy else chance)
         p_loss = 1 - p_win
         starting_amount = starting_amount // gamble_amount
         goal = goal // gamble_amount
