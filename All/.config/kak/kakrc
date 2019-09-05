@@ -71,3 +71,5 @@ set global termcmd 'gnome-terminal -e '
 map global user n ':new<ret>'
 
 map global user v ':terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>'
+
+addhl global/ show-whitespaces -spc ' ' -lf ' '
