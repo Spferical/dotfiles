@@ -2,13 +2,15 @@ colorscheme gruvbox
 
 set global scrolloff 5,0
 
-set global termcmd 'gnome-terminal -e '
-
 add-highlighter global/ wrap -word -indent
 
 def RemoveTrailingWhitespace %{
-    execute-keys "\%s\h+$<ret>d;"
+    execute-keys '%s\h+$<ret>d;'
 }
+
+map global user / ':tmux-terminal-horizontal kak -c %val{session}<ret>’ -docstring ‘Split horizontal'
+
+map global user = ':tmux-terminal-vertical kak -c %val{session}<ret>’ -docstring ‘Split vertical'
 
 hook global WinSetOption filetype=go %{
     set window lintcmd "func() {
@@ -27,21 +29,11 @@ hook global NormalKey y|d|c %{ nop %sh{
 map global user P -docstring 'pastes x clipoard contents before the selection' '! xsel --output --clipboard<ret>'
 map global user p -docstring 'pastes x clipboard contents after the selection' '<a-!> xsel --output --clipboard<ret>'
 
-map global normal <c-p> ':find '
-
-map global user -docstring 'displays lsp-hover info' h ': lsp-hover<ret>'
-
-def find -params 1 -shell-script-candidates %{ ag -l } %{ edit %arg{1} }
-
-ranger-open-on-edit-directory
-
-eval %sh{kak-lsp --kakoune -s $kak_session}
-
-hook global BufCreate .* %{editorconfig-load}
+hook global BufCreate [^*].*[^*] %{editorconfig-load}
 
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
-plug "andreyorst/plug.kak"
+plug "andreyorst/plug.kak" noload
 
 plug "TeddyDD/kakoune-wiki"
 wiki_setup "/home/matthew/Dropbox/vimwiki"
@@ -57,4 +49,28 @@ def MakeJournalNote %{
     }
 }
 
-map global user v '! git -C ~/Dropbox/vimwiki/ commit -am "kak commit"'
+map global user c '! git -C ~/Dropbox/vimwiki/ commit -am "kak commit"'
+
+plug "ul/kak-lsp" do %{
+    cargo install --locked --force --path .
+} config %{
+    map global user h ':lsp-hover<ret>'
+    map global user d ':lsp-definition<ret>'
+}
+
+plug "andreyorst/fzf.kak" config %{
+    map global user f ':fzf-mode<ret>'
+    set-option global fzf_file_command 'rg'
+}
+
+
+#eval %sh{kak-lsp --kakoune -s $kak_session}
+
+require-module x11
+set global termcmd 'gnome-terminal -e '
+
+map global user n ':new<ret>'
+
+map global user v ':terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>'
+
+addhl global/ show-whitespaces -spc ' ' -lf ' '
