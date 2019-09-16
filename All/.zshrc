@@ -51,7 +51,11 @@ setopt HIST_IGNORE_DUPS
 setopt nohup
 
 # syntax higlighting like fish
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -a /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ -a /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # Ctrl+r history search
 bindkey '^R' history-incremental-search-backward
@@ -157,8 +161,10 @@ zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
 # fzf
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+if [[ -a /usr/share/fzf/key-bindings.zsh ]]; then
+	source /usr/share/fzf/key-bindings.zsh
+	source /usr/share/fzf/completion.zsh
+fi
 
 # Added by Krypton
 export GPG_TTY=$(tty)
