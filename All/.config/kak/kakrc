@@ -51,20 +51,17 @@ def MakeJournalNote %{
 
 map global user c '! git -C ~/Dropbox/vimwiki/ commit -am "kak commit"'
 
-plug "ul/kak-lsp" do %{
-    cargo install --locked --force --path .
-} config %{
-    map global user h ':lsp-hover<ret>'
-    map global user d ':lsp-definition<ret>'
-}
-
 plug "andreyorst/fzf.kak" config %{
     map global user f ':fzf-mode<ret>'
-    set-option global fzf_file_command 'rg'
+    # custom rg options so that we don't follow symlinks
+    set-option global fzf_file_command 'rg --hidden --files'
 }
 
 
-#eval %sh{kak-lsp --kakoune -s $kak_session}
+eval %sh{kak-lsp --kakoune -s $kak_session}
+set-option global lsp_server_configuration rust.clippy_preference="on"
+map global user h ':lsp-hover<ret>'
+map global user d ':lsp-definition<ret>'
 
 require-module x11
 set global termcmd 'gnome-terminal -e '
@@ -74,3 +71,5 @@ map global user n ':new<ret>'
 map global user v ':terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>'
 
 addhl global/ show-whitespaces -spc ' ' -lf ' '
+
+map global user e ':echo %sh{gnome-terminal -- sh -c "source ~/.profile && ranger $(dirname \\"$kak_buffile\\")"}<ret>'
