@@ -1,0 +1,10 @@
+#!/bin/bash
+
+unset GNOME_TERMINAL_SCREEN
+
+if [ -n "$(kak -l)" ]
+then
+    kak -c $(kak -l) "$@"
+else
+    kak "$@"
+fi
