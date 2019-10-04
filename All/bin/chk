@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cargo check --color=always 2>&1 | less -R
+cargo check --color=always "$@" 2>&1 | less -R
