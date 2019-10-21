@@ -64,7 +64,9 @@ map global user h ':lsp-hover<ret>'
 map global user d ':lsp-definition<ret>'
 
 require-module x11
-set global termcmd 'gnome-terminal -e '
+set global termcmd 'gnome-terminal -e'
+
+map global user k ':terminal kakhack kak -c %val{session}<ret>'
 
 map global user n ':new<ret>'
 
