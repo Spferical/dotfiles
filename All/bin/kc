@@ -2,9 +2,21 @@
 
 unset GNOME_TERMINAL_SCREEN
 
-if [ -n "$(kak -l)" ]
-then
-    kak -c $(kak -l) "$@"
-else
-    kak "$@"
-fi
+kc() {
+    local sessions="$(kak -l | grep -v dead)"
+    if [ -n "$sessions" ]
+    then
+        local num_sessions="$(echo \"$sessions\" | wc -w)"
+        if [ "$num_sessions" -gt 1 ]
+        then
+            echo "$num_sessions running sessions:"
+            echo "$sessions"
+            exit 1
+        fi
+        kak -c "$sessions" "$@"
+    else
+        kak "$@"
+    fi
+}
+
+kc "$@"
