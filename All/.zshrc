@@ -84,57 +84,21 @@ alias ls='ls -F --color=auto'
 alias grep='grep --colour=auto'
 alias pacman='pacman --color=auto'
 alias less="less -R" # output color codes
-
 alias namemaker="shuf -n 2 /usr/share/dict/words | tr -dc 'A-Za-z0-9'"
 function define {
 	wn "$1" -over
 }
 alias cls='clear && ls'
-alias wat='echo wat is it'
 
 # common ls alias
 alias ll='ls -l'
 
-function hack {
-    ip
-    ping -c 3 localhost
-    traceroute google.com
-    hexdump -C /dev/urandom
-}
-
 #ls, showing only directories
 alias lsd='ls -d */'
 
-#for utilizing all 4 cores on my netbook for playing videos
-#due to the lack of linux drivers for the GMA3600
-alias quadplayer="mplayer -lavdopts threads=4"
-
-# list network devices
-netls() {
-    awk '/:/ { sub(":", "", $1); print $1 }' /proc/net/dev
-}
-
-# Display image with tput
-function image() {
-    convert "$1" -resize 40 txt:-|sed -E 's/://;s/\( ? ?//;s/, ? ?/,/g;s/\)//;s/([0-9]+,[0-9]+,[0-9]+),[0-9]+/\1/g;s/255/254/g;/mage/d'|awk '{print $1,$2}'|sed -E 's/^0,[0-9]+ /print "echo;tput setaf "\;/;s/^[0-9]+,[0-9]+ /print "tput setaf ";/;s/(.+),(.+),(.+)/\1\/42.5*36+\2\/42.5*6+\3\/42.5+16/'|bc|sed 's/$/;echo -n "  ";/'|tr '\n' ' '|sed 's/^/tput rev;/;s/; /;/g;s/$/tput sgr0;echo/'|bash
-}
-
-alias p=pikaur
-alias pss="pikaur -Ss"
-
-function download_website() {
-	#usage: download_website url
-	wget --mirror -p --convert-links -P "$1""files" "$1"
-}
-
-alias gzim="gvim ~/Dropbox/Notebooks/Notes/"
 alias pe="ps -e"
-alias tmuxa='tmx alpha'
 alias l=ls
 alias lstr='ls --sort time --reverse'
-
-# quickly share a folder
-alias share='ip addr | grep inet; python3 -m http.server'
 
 # ls'ing hidden files
 alias lh='ls -a | egrep "^\."'
@@ -151,11 +115,7 @@ alias mpv="mpv --hwdec=auto --vo=opengl"
 
 alias t=task
 
-dot () {
-	for ((i = 0; i < $1; i++)); do echo -n "."; sleep 0.04; done; echo -e '[\033[00;32mCOMPLETE\033[00;0m]'
-}
-
-# edit command in vim
+# edit command in editor
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
@@ -165,9 +125,6 @@ if [[ -a /usr/share/fzf/key-bindings.zsh ]]; then
 	source /usr/share/fzf/key-bindings.zsh
 	source /usr/share/fzf/completion.zsh
 fi
-
-# Added by Krypton
-export GPG_TTY=$(tty)
 
 # mem use and page fault info for time
 # from burntsushi -- https://news.ycombinator.com/item?id=19525109
