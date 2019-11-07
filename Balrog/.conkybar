@@ -18,11 +18,7 @@ conky.config = {
 
 conky.text = [[
 [ \
- ${if_running mpd}${if_mpd_playing}{ \
-  "full_text": "♪ ${scroll 20 20 $mpd_smart}", \
-  "color": "\#e3e0d7" \
- }, \
- $endif$endif{ \
+{ \
   "full_text": "↑ $uptime_short", \
   "color": "\#e5786d" \
  }, \
