@@ -31,6 +31,10 @@ map global user p -docstring 'pastes x clipboard contents after the selection' '
 
 hook global BufCreate [^*].*[^*] %{editorconfig-load}
 
+hook global WinSetOption filetype=git-commit %{
+    set window autowrap_column 72
+}
+
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak" noload
