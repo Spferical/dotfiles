@@ -8,9 +8,9 @@ def RemoveTrailingWhitespace %{
     execute-keys '%s\h+$<ret>d;'
 }
 
-map global user / ':tmux-terminal-horizontal kak -c %val{session}<ret>’ -docstring ‘Split horizontal'
+map global user / ':tmux-terminal-horizontal kak -c %val{session}<ret>' -docstring 'Split horizontal'
 
-map global user = ':tmux-terminal-vertical kak -c %val{session}<ret>’ -docstring ‘Split vertical'
+map global user = ':tmux-terminal-vertical kak -c %val{session}<ret>' -docstring 'Split vertical'
 
 hook global WinSetOption filetype=go %{
     set window lintcmd "func() {
@@ -60,18 +60,18 @@ plug "andreyorst/fzf.kak" config %{
 
 eval %sh{kak-lsp --kakoune -s $kak_session}
 set-option global lsp_server_configuration rust.clippy_preference="on"
-map global user h ':lsp-hover<ret>'
-map global user d ':lsp-definition<ret>'
+map global user h ':lsp-hover<ret>' -docstring 'Show hover info'
+map global user d ':lsp-definition<ret>' -docstring 'Jump to definition'
 
 require-module x11
 set global termcmd 'gnome-terminal -e'
 
-map global user k ':terminal kakhack kak -c %val{session}<ret>'
+map global user k ':terminal kakhack kak -c %val{session}<ret>' -docstring 'new kakoune window working around issues it has with i3wm'
 
-map global user n ':new<ret>'
+map global user n ':new<ret>' -docstring 'new kakoune window'
 
-map global user v ':terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>'
+map global user v ':terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>' -docstring 'Open in nvim'
 
 addhl global/ show-whitespaces -spc ' ' -lf ' '
 
-map global user e ':echo %sh{gnome-terminal -- sh -c "source ~/.profile && ranger $(dirname \\"$kak_buffile\\")"}<ret>'
+map global user e ':echo %sh{gnome-terminal -- sh -c "source ~/.profile && ranger $(dirname \\"$kak_buffile\\")"}<ret>' -docstring 'open directory of current file in ranger'
