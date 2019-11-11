@@ -79,3 +79,11 @@ map global user v ':terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>' -do
 addhl global/ show-whitespaces -spc ' ' -lf ' '
 
 map global user e ':echo %sh{gnome-terminal -- sh -c "source ~/.profile && ranger $(dirname \\"$kak_buffile\\")"}<ret>' -docstring 'open directory of current file in ranger'
+
+set global grepcmd 'rg --hidden --column '
+
+map global user g ':grep '
+
+map global user q '| fmt -w $kak_opt_autowrap_column<ret>'
+
+map global user D '! date +"%a %d %b %Y"<ret>'
