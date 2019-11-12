@@ -213,6 +213,10 @@ exec_always --no-startup-id random-background
 # renaming workspaces
 bindsym $mod+Ctrl+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
+bindsym $mod+Shift+b exec --no-startup-id bluetoothctl power on && bluetoothctl connect 4C:87:5D:58:44:2E && pactl set-card-profile bluez_card.4C_87_5D_58_44_2E a2dp_sink && pactl set-card-profile alsa_card.pci-0000_00_1f.3 off && notify-send "switched to bluetooth"
+
+bindsym $mod+Shift+v exec --no-startup-id bluetoothctl power off && pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo && notify-send "switched to stereo duplex"
+
 # rename starting workspace
 exec --no-startup-id i3-msg 'rename workspace to "1:🌐"'
 
