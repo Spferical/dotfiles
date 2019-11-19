@@ -51,9 +51,11 @@ setopt HIST_IGNORE_DUPS
 setopt nohup
 
 # syntax higlighting like fish
-if [[ -a /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+if [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    # fedora
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ -a /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+elif [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    # archlinux
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
@@ -121,9 +123,13 @@ zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
 # fzf
-if [[ -a /usr/share/fzf/key-bindings.zsh ]]; then
-	source /usr/share/fzf/key-bindings.zsh
-	source /usr/share/fzf/completion.zsh
+if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
+    # archlinux
+    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/completion.zsh
+elif [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
+    # fedora
+    source /usr/share/fzf/shell/key-bindings.zsh
 fi
 
 # mem use and page fault info for time
