@@ -242,7 +242,7 @@ for_window [class="openhexagon.x86_64"] floating enable; border none; focus mode
 for_window [class="UE4Editor"] floating enable
 
 bar {
-   status_command conkybar.sh
+   status_command i3blocks
    strip_workspace_numbers yes
    colors {
       background #1c1c1c

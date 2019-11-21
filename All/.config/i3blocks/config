@@ -1,0 +1,65 @@
+command=~/.config/i3blocks/$BLOCK_NAME/$BLOCK_NAME
+separator_block_width=15
+
+[uptime]
+command=eval "echo ↑$(date -d "@`cut -f1 -d. /proc/uptime`" +'$((%s/3600/24))d %Hh')"
+interval=10
+color=#e5786d
+
+[disk]
+command=df -h -P /home | awk  '/\/.*/ { print $4; print $4 }'
+label=/
+interval=30
+color=#50fc50
+
+[battery3]
+instance=acpi -b 2>/dev/null|
+interval=30
+BAT_NUMBER=0
+color=#ffad33
+
+[battery3]
+instance=1
+interval=30
+BAT_NUMBER=1
+color=#ffad33
+
+[ssid]
+command=iwgetid -r
+color=#f8fc50
+interval=1
+separator=false
+
+[bandwidth4]
+color=#f8fc50
+instance=wlp3s0;in
+interval=1
+label=▼
+separator=false
+
+[bandwidth4]
+color=#f8fc50
+instance=wlp3s0;out
+interval=1
+label=▲
+
+[memory]
+label=
+interval=30
+color=#77a7e5
+
+[load_average]
+command=zsh -c 'l=`cut -d " " -f1 /proc/loadavg`; echo $l\\n$l; test $l -gt `nproc` && exit 33;'
+interval=1
+color=#f854f8
+label=
+
+[disk-io]
+interval=persist
+WIDTH=3
+DT=1
+
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
+color=#50fcf8
