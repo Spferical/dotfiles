@@ -15,7 +15,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 #my editor
-export EDITOR="kak"
+export EDITOR="kc"
 export VISUAL="$EDITOR"
 
 # favorite terminal
@@ -39,8 +39,8 @@ export PYTHONSTARTUP="$HOME/.pyrc"
 #always truncate ponysay height, even when not in TTY
 export PONYSAY_TRUNCATE_HEIGHT=1
 
-export BUILDDIR=/var/tmp/pacaurtmp-$USER
-
 export QT_QPA_PLATFORMTHEME='gtk2'
 
 export RUST_SRC_PATH=$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/
+
+export FZF_CTRL_T_COMMAND="rg --hidden --files"
