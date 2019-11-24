@@ -13,15 +13,18 @@ interval=30
 color=#50fc50
 
 [battery3]
-instance=acpi -b 2>/dev/null|
 interval=30
 BAT_NUMBER=0
 color=#ffad33
 
 [battery3]
-instance=1
 interval=30
 BAT_NUMBER=1
+color=#ffad33
+
+[battery3]
+interval=30
+BAT_NUMBER=2
 color=#ffad33
 
 [ssid]
