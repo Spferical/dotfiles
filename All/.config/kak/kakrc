@@ -48,13 +48,17 @@ plug "TeddyDD/kakoune-edit-or-dir" config %{
     alias global e edit-or-dir
 }
 
+plug "dryvenn/kakoune-cscope" config %{
+    map -docstring 'cscope menu' global user 'c' ':cscope-menu<ret>'
+}
+
 def MakeJournalNote %{
     execute-keys %sh{
         echo ":wiki journal/$(date +%Y-%m-%d).md<ret>"
     }
 }
 
-map global user c '! git -C ~/Dropbox/vimwiki/ commit -am "kak commit"'
+map global user C '! git -C ~/Dropbox/vimwiki/ commit -am "kak commit"'
 
 plug "andreyorst/fzf.kak" config %{
     map global user f ':fzf-mode<ret>'
