@@ -65,6 +65,9 @@ plug "andreyorst/fzf.kak" config %{
 } defer "fzf" %{
     # custom rg options so that we don't follow symlinks
     set-option global fzf_file_command 'rg --hidden --files'
+    evaluate-commands %sh{
+        [ -n "$(command -v bat)" ] && echo "set-option global fzf_highlight_command bat"
+    }
 }
 
 
