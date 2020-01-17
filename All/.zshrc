@@ -117,6 +117,8 @@ alias mpv="mpv --hwdec=auto --vo=opengl"
 
 alias t=task
 
+alias sl=ls
+
 # edit command in editor
 autoload -U edit-command-line
 zle -N edit-command-line
