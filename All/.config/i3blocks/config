@@ -36,14 +36,14 @@ separator=false
 [bandwidth4]
 color=#f8fc50
 instance=wlp3s0;in
-interval=1
+interval=5
 label=▼
 separator=false
 
 [bandwidth4]
 color=#f8fc50
 instance=wlp3s0;out
-interval=1
+interval=5
 label=▲
 
 [memory]
