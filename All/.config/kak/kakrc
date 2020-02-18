@@ -39,8 +39,9 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak" noload
 
-plug "TeddyDD/kakoune-wiki"
-wiki_setup "/home/matthew/Dropbox/vimwiki"
+plug "TeddyDD/kakoune-wiki" config %{
+    wiki-setup "/home/matthew/Dropbox/vimwiki"
+}
 
 plug "TeddyDD/kakoune-edit-or-dir" config %{
     unalias global e edit
@@ -49,7 +50,7 @@ plug "TeddyDD/kakoune-edit-or-dir" config %{
 
 def MakeJournalNote %{
     execute-keys %sh{
-        echo ":wiki journal/$(date +"%Y-%m-%d").md<ret>"
+        echo ":wiki journal/$(date +%Y-%m-%d).md<ret>"
     }
 }
 
@@ -57,6 +58,7 @@ map global user c '! git -C ~/Dropbox/vimwiki/ commit -am "kak commit"'
 
 plug "andreyorst/fzf.kak" config %{
     map global user f ':fzf-mode<ret>'
+} defer "fzf" %{
     # custom rg options so that we don't follow symlinks
     set-option global fzf_file_command 'rg --hidden --files'
 }
