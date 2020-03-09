@@ -33,7 +33,8 @@ else
 	local _ssh=""
 fi
 local _wdir="$_bblue%~"
-local _code="$_bred%?"
+local _code="%(?..%{$_bred%})%?"
+
 PROMPT="$_deco┌─[$_time$_deco|$_name$_ssh$_deco|$_wdir$_deco|$_code$_deco]$prompt_newline$_deco└─>$ $_reset"
 # keep environmental pollution down
 unset _blue _bblue _deco _bcyan _bred _time _name _yellow _reset _ssh _wdir _code
