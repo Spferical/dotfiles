@@ -4,6 +4,10 @@ borg create -v\
     --list -s\
     --compression lzma\
     -e $HOME/.cache\
+    -e $HOME/.config/Riot/Cache\
+    -e "$HOME/dev/*/target/rls"\
+    -e "$HOME/dev/*/target/debug"\
+    -e "$HOME/dev/*/target/release"\
     -e "__pycache__"\
     -e "*.pyc"\
     -e $HOME/.local/share/Steam/\
