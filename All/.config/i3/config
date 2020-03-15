@@ -155,7 +155,7 @@ mode "transparency" {
 bindsym $mod+o mode "transparency"
 
 #lock screensaver
-bindsym $mod+Shift+x exec xscreensaver-command -lock
+bindsym $mod+Shift+x exec i3lock -c 000000
 
 #media keys
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
@@ -168,7 +168,6 @@ bindsym Print exec xfce4-screenshooter
 bindsym $mod+t exec thunar
 bindsym $mod+Shift+f exec i3-sensible-terminal -e "ranger"
 bindsym $mod+Shift+m exec i3-sensible-terminal -e "bashmount"
-bindsym $mod+Ctrl+h exec xscreensaver-command -lock && systemctl hibernate
 bindsym $mod+b exec --no-startup-id random-background
 
 bindsym $mod+Ctrl+s move scratchpad
@@ -196,8 +195,7 @@ exec --no-startup-id dunst
 for_window [title="screenkey"] floating enable;border none; focus mode_toggle
 
 #startup applications
-exec xscreensaver -no-splash
-exec mintupdate-launcher
+exec xautolock -time 15 -locker i3lock
 # sleep beforehand because for some reason didn't work as normal startup
 exec sleep 2 && redshift-gtk
 exec_always --no-startup-id set-touchpad-settings
