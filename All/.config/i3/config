@@ -174,8 +174,8 @@ bindsym $mod+Ctrl+s move scratchpad
 bindsym $mod+Shift+s scratchpad show
 
 # vimwiki
-bindsym $mod+Ctrl+v exec i3-sensible-terminal -e "kak -e 'wiki index.md'"
-bindsym $mod+Ctrl+j exec i3-sensible-terminal -e "kak -e MakeJournalNote"
+bindsym $mod+Ctrl+v exec i3-sensible-terminal -e "kc -e 'wiki index.md'"
+bindsym $mod+Ctrl+j exec i3-sensible-terminal -e "kc -e MakeJournalNote"
 # ideas
 bindsym $mod+Ctrl+i exec urxvt -e nvim ~/Sync/vimwiki/Ideas.wiki
 
