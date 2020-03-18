@@ -195,7 +195,7 @@ exec --no-startup-id dunst
 for_window [title="screenkey"] floating enable;border none; focus mode_toggle
 
 #startup applications
-exec xautolock -time 15 -locker i3lock
+exec xautolock -time 30 -locker "i3lock -c 000000"
 # sleep beforehand because for some reason didn't work as normal startup
 exec sleep 2 && redshift-gtk
 exec_always --no-startup-id set-touchpad-settings
