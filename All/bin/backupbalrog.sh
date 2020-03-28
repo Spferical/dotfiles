@@ -5,6 +5,7 @@ borg create -v\
     --compression lzma\
     -e $HOME/.cache\
     -e $HOME/.config/Riot/Cache\
+    -e $HOME/.config/Electron/Cache\
     -e "$HOME/dev/*/target/rls"\
     -e "$HOME/dev/*/target/debug"\
     -e "$HOME/dev/*/target/release"\
