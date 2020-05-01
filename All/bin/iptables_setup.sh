@@ -39,6 +39,9 @@ iptables -A INPUT -p udp --dport 60000:61000 -j ACCEPT
 iptables -A INPUT -p udp --dport 25116 -j ACCEPT
 iptables -A INPUT -p tcp --dport 25116 -j ACCEPT
 
+# factorio
+iptables -A INPUT -p udp --dport 34197 -j ACCEPT
+
 # secure scuttlebutt
 iptables -A TCP -p tcp --dport 8008 -j ACCEPT
 
