@@ -58,7 +58,7 @@ def MakeJournalNote %{
     }
 }
 
-map global user C '! git -C ~/Dropbox/vimwiki/ commit -am "kak commit"'
+map global user C '! git -C ~/Dropbox/vimwiki add -A && git -C ~/Dropbox/vimwiki/ commit -m "kak commit"'
 
 plug "andreyorst/fzf.kak" config %{
     map global user f ':fzf-mode<ret>'
