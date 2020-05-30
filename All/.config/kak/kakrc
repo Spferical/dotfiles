@@ -73,9 +73,12 @@ plug "andreyorst/fzf.kak" config %{
 
 eval %sh{kak-lsp --kakoune -s $kak_session}
 set-option global lsp_server_configuration rust.clippy_preference="on"
+# kakoune seems to pass this as an option to lsp format commands...
+set-option global tabstop 4
 map global user h ':lsp-hover<ret>' -docstring 'Show hover info'
 map global user d ':lsp-definition<ret>' -docstring 'Jump to definition'
 map global user a ':lsp-code-actions<ret>'
+lsp-enable
 
 require-module x11
 set global termcmd 'gnome-terminal -e'
