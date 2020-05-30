@@ -58,10 +58,10 @@ def MakeJournalNote %{
     }
 }
 
-map global user C '! git -C ~/Dropbox/vimwiki add -A && git -C ~/Dropbox/vimwiki/ commit -m "kak commit"'
+map global user C '! git -C ~/Dropbox/vimwiki add -A && git -C ~/Dropbox/vimwiki/ commit -m "kak commit"' -docstring 'commit vimwiki'
 
 plug "andreyorst/fzf.kak" config %{
-    map global user f ':fzf-mode<ret>'
+    map global user f ':fzf-mode<ret>' -docstring 'fzf mode'
 } defer "fzf" %{
     # custom rg options so that we don't follow symlinks
     set-option global fzf_file_command 'rg --hidden --files'
@@ -77,7 +77,7 @@ set-option global lsp_server_configuration rust.clippy_preference="on"
 set-option global tabstop 4
 map global user h ':lsp-hover<ret>' -docstring 'Show hover info'
 map global user d ':lsp-definition<ret>' -docstring 'Jump to definition'
-map global user a ':lsp-code-actions<ret>'
+map global user a ':lsp-code-actions<ret>' -docstring 'Code Actions'
 lsp-enable
 
 require-module x11
@@ -95,10 +95,10 @@ map global user e ':echo %sh{gnome-terminal -- sh -c "source ~/.profile && range
 
 set global grepcmd 'rg --hidden --column '
 
-map global user g ':grep '
+map global user g ':grep ' -docstring 'grep'
 
-map global user q '| fmt -w $kak_opt_autowrap_column<ret>'
+map global user q '| fmt -w $kak_opt_autowrap_column<ret>' -docstring 'fmt paragraphs'
 
-map global user D '! date +"%a %d %b %Y"<ret>'
+map global user D '! date +"%a %d %b %Y"<ret>' -docstring 'Insert date'
 
-map global user B ':%sh{black $kak_opt_buffile}'
+map global user B ':%sh{black $kak_opt_buffile}' -docstring 'format with Black'
