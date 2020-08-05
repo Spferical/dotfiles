@@ -92,20 +92,20 @@ alias namemaker="shuf -n 2 /usr/share/dict/words | tr -dc 'A-Za-z0-9'"
 function define {
 	wn "$1" -over
 }
-alias cls='clear && ls'
+alias cls='clear && exa'
 
 # common ls alias
-alias ll='ls -l'
+alias ll='exa -l'
 
 #ls, showing only directories
-alias lsd='ls -d */'
+alias lsd='exa -d */'
 
 alias pe="ps -e"
-alias l=ls
-alias lstr='ls --sort time --reverse'
+alias l=exa
+alias lstr='exa --sort time'
 
 # ls'ing hidden files
-alias lh='ls -a | egrep "^\."'
+alias lh='exa -a | egrep "^\."'
 
 # du files and sort by size
 alias dh='du -ha | sort -h'
@@ -119,7 +119,7 @@ alias mpv="mpv --hwdec=auto --vo=opengl"
 
 alias t=task
 
-alias sl=ls
+alias sl=exa
 
 # edit command in editor
 autoload -U edit-command-line
