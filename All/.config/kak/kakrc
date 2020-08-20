@@ -101,7 +101,7 @@ set global grepcmd 'rg --hidden --column '
 
 map global user g ':grep ' -docstring 'grep'
 
-map global user q '| fmt -w $kak_opt_autowrap_column<ret>' -docstring 'fmt paragraphs'
+map global user q '| par -w $kak_opt_autowrap_column<ret>' -docstring 'paragraph reformat'
 
 map global user D '! date +"%a %d %b %Y"<ret>' -docstring 'Insert date'
 
