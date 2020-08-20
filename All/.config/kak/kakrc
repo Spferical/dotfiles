@@ -77,9 +77,12 @@ set-option global lsp_server_configuration rust.clippy_preference="on"
 set-option global tabstop 4
 map global user h ':lsp-hover<ret>' -docstring 'Show hover info'
 map global user d ':lsp-definition<ret>' -docstring 'Jump to definition'
+map global user i ':lsp-diagnostics<ret>' -docstring 'List project diagnostics'
+map global user t ':lsp-type-definition<ret>' -docstring 'Jump to type definition'
 map global user a ':lsp-code-actions<ret>' -docstring 'Code Actions'
 map global user F ':lsp-formatting-sync<ret>' -docstring 'Format code'
 lsp-enable
+lsp-inlay-diagnostics-enable global
 
 require-module x11
 set global termcmd 'gnome-terminal -e'
