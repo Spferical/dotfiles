@@ -206,9 +206,9 @@ def_key "d"
 #def_key "right"
 #  volume_up
 #
-#def_key "+"
-#  volume_up
-#
+def_key "+"
+  volume_up
+
 #def_key "left"
 #  previous_column
 #
@@ -218,9 +218,9 @@ def_key "d"
 #def_key "left"
 #  volume_down
 #
-#def_key "-"
-#  volume_down
-#
+def_key "-"
+  volume_down
+
 #def_key ":"
 #  execute_command
 #
