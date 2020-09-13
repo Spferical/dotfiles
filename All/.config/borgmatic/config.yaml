@@ -14,7 +14,7 @@ location:
     # or port.
     repositories:
         - rl1huyxi@rl1huyxi.repo.borgbase.com:repo
-        - /run/media/matthew/BACKUP/balrog
+        - /run/media/matthew/backup/balrog
 
     # Any paths matching these patterns are excluded from backups.
     # Globs and tildes are expanded. See the output of "borg help
@@ -38,11 +38,13 @@ location:
         - /home/matthew/quote
         - /home/matthew/.rustup
         - /home/matthew/.cargo
+        - /home/matthew/.googleearth/Cache/
+        - /home/matthew/.nuget
 
     # Exclude directories that contain a CACHEDIR.TAG file. See
     # http://www.brynosaurus.com/cachedir/spec.html for details.
     # Defaults to false.
-    # exclude_caches: true
+    exclude_caches: true
 
     # Exclude directories that contain a file with the given
     # filenames. Defaults to not set.
