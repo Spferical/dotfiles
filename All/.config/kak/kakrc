@@ -3,6 +3,8 @@ colorscheme gruvbox
 set global scrolloff 5,0
 
 add-highlighter global/ wrap -word -indent
+add-highlighter global/ column '%opt{autowrap_column}' default,black
+add-highlighter global/ column 100 default,black
 
 def RemoveTrailingWhitespace %{
     execute-keys '%s\h+$<ret>d;'
