@@ -19,9 +19,9 @@ export EDITOR="kc"
 export VISUAL="$EDITOR"
 
 # favorite terminal
-export TERMINAL=gnome-terminal
+export TERMINAL=xfce4-terminal
 # for ranger
-export TERMCMD=gnome-terminal
+export TERMCMD=xfce4-terminal
 
 # darwinia/multiwinia use this, and default to oss
 # which makes the sound in the menus weird
