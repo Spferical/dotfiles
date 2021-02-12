@@ -19,9 +19,9 @@ export EDITOR="kc"
 export VISUAL="$EDITOR"
 
 # favorite terminal
-export TERMINAL=xfce4-terminal
+export TERMINAL=alacritty
 # for ranger
-export TERMCMD=xfce4-terminal
+export TERMCMD=alacritty
 
 # darwinia/multiwinia use this, and default to oss
 # which makes the sound in the menus weird

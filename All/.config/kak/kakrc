@@ -91,7 +91,7 @@ lsp-enable
 lsp-inlay-diagnostics-enable global
 
 require-module x11
-set global termcmd 'xfce4-terminal -e'
+set global termcmd 'alacritty -e sh -c'
 
 map global user k ':terminal kakhack kak -c %val{session}<ret>' -docstring 'new kakoune window working around issues it has with i3wm'
 
