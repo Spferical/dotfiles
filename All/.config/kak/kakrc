@@ -14,9 +14,9 @@ def RemoveTrailingWhitespace %{
     execute-keys '%s\h+$<ret>d;'
 }
 
-map global user / ':tmux-terminal-horizontal kak -c %val{session}<ret>' -docstring 'Split horizontal'
+map global user / ': tmux-terminal-horizontal kak -c %val{session}<ret>' -docstring 'Split horizontal'
 
-map global user = ':tmux-terminal-vertical kak -c %val{session}<ret>' -docstring 'Split vertical'
+map global user = ': tmux-terminal-vertical kak -c %val{session}<ret>' -docstring 'Split vertical'
 
 hook global WinSetOption filetype=go %{
     set window lintcmd "func() {
@@ -51,19 +51,19 @@ plug "TeddyDD/kakoune-edit-or-dir" config %{
 }
 
 plug "dryvenn/kakoune-cscope" config %{
-    map -docstring 'cscope menu' global user 'c' ':cscope-menu<ret>'
+    map -docstring 'cscope menu' global user 'c' ': cscope-menu<ret>'
 }
 
 def MakeJournalNote %{
     execute-keys %sh{
-        echo ":wiki journal/$(date +%Y-%m-%d).md<ret>"
+        echo ": wiki journal/$(date +%Y-%m-%d).md<ret>"
     }
 }
 
 map global user C '! git -C ~/Dropbox/vimwiki add -A && git -C ~/Dropbox/vimwiki/ commit -m "kak commit"' -docstring 'commit vimwiki'
 
 plug "andreyorst/fzf.kak" config %{
-    map global user f ':fzf-mode<ret>' -docstring 'fzf mode'
+    map global user f ': fzf-mode<ret>' -docstring 'fzf mode'
 } defer "fzf" %{
     # custom rg options so that we don't follow symlinks
     set-option global fzf_file_command 'rg --hidden --files'
@@ -78,33 +78,34 @@ plug "lePerdu/kakboard" %{
 
 eval %sh{kak-lsp --kakoune -s $kak_session}
 set-option global lsp_server_configuration rust.clippy_preference="on"
+
 # kakoune seems to pass this as an option to lsp format commands...
 set-option global tabstop 4
-map global user h ':lsp-hover<ret>' -docstring 'Show hover info'
-map global user d ':lsp-definition<ret>' -docstring 'Jump to definition'
-map global user i ':lsp-diagnostics<ret>' -docstring 'List project diagnostics'
-map global user t ':lsp-type-definition<ret>' -docstring 'Jump to type definition'
-map global user a ':lsp-code-actions<ret>' -docstring 'Code Actions'
-map global user F ':lsp-formatting-sync<ret>' -docstring 'Format code'
+map global user h ': lsp-hover<ret>' -docstring 'Show hover info'
+map global user d ': lsp-definition<ret>' -docstring 'Jump to definition'
+map global user i ': lsp-diagnostics<ret>' -docstring 'List project diagnostics'
+map global user t ': lsp-type-definition<ret>' -docstring 'Jump to type definition'
+map global user a ': lsp-code-actions<ret>' -docstring 'Code Actions'
+map global user F ': lsp-formatting-sync<ret>' -docstring 'Format code'
 lsp-enable
 lsp-inlay-diagnostics-enable global
 
 require-module x11
 set global termcmd 'alacritty -e sh -c'
 
-map global user k ':terminal kakhack kak -c %val{session}<ret>' -docstring 'new kakoune window working around issues it has with i3wm'
+map global user k ': terminal kakhack kak -c %val{session}<ret>' -docstring 'new kakoune window working around issues it has with i3wm'
 
-map global user n ':new<ret>' -docstring 'new kakoune window'
-map global user s ':new edit %val{bufname}' -docstring 'edit current buffer in new window'
-map global user v ':terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>' -docstring 'Open in nvim'
+map global user n ': new<ret>' -docstring 'new kakoune window'
+map global user s ': new edit %val{bufname}' -docstring 'edit current buffer in new window'
+map global user v ': terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>' -docstring 'Open in nvim'
 
 addhl global/ show-whitespaces -spc ' ' -lf ' '
 
-map global user e ':echo %sh{gnome-terminal -- sh -c "source ~/.profile && ranger $(dirname \\"$kak_buffile\\")"}<ret>' -docstring 'open directory of current file in ranger'
+map global user e ': echo %sh{gnome-terminal -- sh -c "source ~/.profile && ranger $(dirname \\"$kak_buffile\\")"}<ret>' -docstring 'open directory of current file in ranger'
 
 set global grepcmd 'rg --hidden --column '
 
-map global user g ':grep ' -docstring 'grep'
+map global user g ': grep ' -docstring 'grep'
 
 map global user q '| par -w $kak_opt_autowrap_column<ret>' -docstring 'paragraph reformat'
 
@@ -112,4 +113,4 @@ map global user D '! date +"%a %d %b %Y"<ret>' -docstring 'Insert date'
 
 map global user B ':%sh{black $kak_opt_buffile}' -docstring 'format with Black'
 
-map global user E ':lsp find-error<ret>'
+map global user E ': lsp find-error<ret>'
