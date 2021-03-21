@@ -44,3 +44,5 @@ export QT_QPA_PLATFORMTHEME='gtk2'
 export RUST_SRC_PATH=$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/
 
 export FZF_CTRL_T_COMMAND="rg --hidden --files"
+
+export MOZ_ENABLE_WAYLAND=1
