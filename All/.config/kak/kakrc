@@ -28,10 +28,6 @@ hook global WinSetOption filetype=go %{
     hook buffer BufWritePost .* lint
 }
 
-hook global NormalKey y|d|c %{ nop %sh{
-  printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
-}}
-
 map global user P -docstring 'pastes x clipoard contents before the selection' '! xsel --output --clipboard<ret>'
 map global user p -docstring 'pastes x clipboard contents after the selection' '<a-!> xsel --output --clipboard<ret>'
 
@@ -76,6 +72,9 @@ plug "andreyorst/fzf.kak" config %{
     }
 }
 
+plug "lePerdu/kakboard" %{
+    hook global WinCreate .* %{kakboard-enable}
+}
 
 eval %sh{kak-lsp --kakoune -s $kak_session}
 set-option global lsp_server_configuration rust.clippy_preference="on"
