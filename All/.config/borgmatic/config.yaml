@@ -13,8 +13,8 @@ location:
     # sequence. See ssh_command for SSH options like identity file
     # or port.
     repositories:
-        - rl1huyxi@rl1huyxi.repo.borgbase.com:repo
         - /run/media/matthew/backup/balrog
+        - rl1huyxi@rl1huyxi.repo.borgbase.com:repo
 
     # Any paths matching these patterns are excluded from backups.
     # Globs and tildes are expanded. See the output of "borg help
