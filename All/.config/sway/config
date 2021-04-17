@@ -176,6 +176,10 @@ bindsym $mod+Ctrl+j exec i3-sensible-terminal -e "kc -e MakeJournalNote"
 # ideas
 bindsym $mod+Ctrl+i exec urxvt -e nvim ~/Sync/vimwiki/Ideas.wiki
 
+exec --no-startup-id amixer -D pulse sset Capture nocap
+bindsym --no-repeat Alt_R exec paplay ~/Music/bleep4.wav & amixer -D pulse sset Capture cap
+bindsym --release Alt_R exec paplay ~/Music/bleep5.wav & amixer -D pulse sset Capture nocap
+
 # 0px Border Windows
 for_window [class="chrome"] border none
 for_window [class="Firefox"] border none
