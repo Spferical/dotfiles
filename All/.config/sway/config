@@ -27,7 +27,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec bmenu-run
+bindsym $mod+d exec bemenu-run
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu=bemenu
 
 # change focus
@@ -160,7 +160,7 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
 
 bindsym $mod+Shift+t exec --no-startup-id touchpad-toggle.sh
-bindsym Print exec xfce4-screenshooter
+bindsym Print exec grim
 bindsym $mod+t exec thunar
 bindsym $mod+Shift+f exec i3-sensible-terminal -e "ranger"
 bindsym $mod+Shift+m exec i3-sensible-terminal -e "bashmount"
@@ -187,13 +187,9 @@ for_window [window_role="task_dialog"] floating enable
 exec --no-startup-id dunst
 for_window [title="screenkey"] floating enable;border none; focus mode_toggle
 
-#startup applications
-# sleep beforehand because for some reason didn't work as normal startup
-exec sleep 2 && redshift-gtk
+exec gammastep -l 42.36:-71.09 -t 6500:3500
 exec_always --no-startup-id set-touchpad-settings
 exec volumeicon
-
-#random desktop background
 exec_always --no-startup-id random-background
 
 # renaming workspaces
@@ -239,7 +235,7 @@ client.focused_inactive #242424 #242424 #e3e0d7 #484e50
 client.unfocused        #242424 #242424 #e3e0d7 #292d2e
 client.urgent           #2f343a #900000 #e3e0d7 #900000
 
-output eDP-1 scale 2.0
+output eDP-1 scale 1.5
 output HDMI-A-2 scale 1.5
 
 input type:keyboard {
@@ -251,7 +247,7 @@ input type:pointer {
     pointer_accel 0
 }
 
-input 2:7:SynPS/2_Synaptics_TouchPad {
+input type:touchpad {
     accel_profile flat
     tap enabled
     pointer_accel 0
