@@ -214,7 +214,7 @@ bindsym $mod+Shift+b exec --no-startup-id bluetoothctl power on && bluetoothctl 
 bindsym $mod+Shift+v exec --no-startup-id bluetoothctl power off && pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo && notify-send "switched to stereo duplex"
 
 # rename starting workspace
-exec --no-startup-id i3-msg 'rename workspace to "1:🌐"'
+exec --no-startup-id i3-msg 'rename workspace to "1:"'
 
 # compton
 exec --no-startup-id compton --unredir-if-possible
