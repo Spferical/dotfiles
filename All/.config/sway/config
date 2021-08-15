@@ -16,7 +16,7 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:Inconsolata 11
+font pango:Inconsolata 16
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -27,8 +27,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec bemenu-run
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu=bemenu
+bindsym $mod+d exec bemenu-run --fn 'Inconsolata 16'
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='bemenu --fn "Inconsolata 16"'
 
 # change focus
 bindsym $mod+h focus left
@@ -138,13 +138,20 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 mode "transparency" {
-        bindsym h exec transset-df -a --dec 0.05
-        bindsym l exec transset-df -a --inc 0.05
-	bindsym Return exec transset-df -a --toggle
+        bindsym h opacity minus 0.01
+        bindsym l opacity plus 0.01
         bindsym Escape mode "default"
 }
-
 bindsym $mod+o mode "transparency"
+
+mode "brightness" {
+        bindsym h exec light -U 5
+        bindsym l exec light -A 5
+        bindsym Shift+h exec light -U 1
+        bindsym Shift+l exec light -A 1
+        bindsym Escape mode "default"
+}
+bindsym $mod+Shift+b mode "brightness"
 
 #lock screensaver
 bindsym $mod+Shift+x exec swaylock -e -c000000
@@ -160,7 +167,7 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
 
 bindsym $mod+Shift+t exec --no-startup-id touchpad-toggle.sh
-bindsym Print exec grim
+bindsym Print exec GRIM_DEFAULT_DIR=~/Pictures/ grim
 bindsym $mod+t exec thunar
 bindsym $mod+Shift+f exec i3-sensible-terminal -e "ranger"
 bindsym $mod+Shift+m exec i3-sensible-terminal -e "bashmount"
@@ -239,8 +246,8 @@ client.focused_inactive #242424 #242424 #e3e0d7 #484e50
 client.unfocused        #242424 #242424 #e3e0d7 #292d2e
 client.urgent           #2f343a #900000 #e3e0d7 #900000
 
-output eDP-1 scale 1.5
-output HDMI-A-2 scale 1.5
+output eDP-1 scale 1
+output HDMI-A-2 scale 1
 
 input type:keyboard {
     xkb_options caps:escape
