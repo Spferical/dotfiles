@@ -29,10 +29,8 @@ hook global WinSetOption filetype=go %{
 }
 
 
-map global user P -docstring 'pastes clipoard contents before the selection' '! wl-copy > /dev/null 2>&1<ret>'
-map global user P -docstring 'pastes clipoard contents before the selection' '! wl-copy > /dev/null 2>&1<ret>'
+map global user P -docstring 'pastes clipoard contents before the selection' '! wl-paste -n<ret>'
 map global user p -docstring 'pastes clipboard contents after the selection' '<a-!> wl-paste -n<ret>'
-map
 
 hook global RegisterModified '"' %{ nop %sh{
     printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
