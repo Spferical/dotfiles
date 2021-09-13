@@ -103,12 +103,12 @@ set global termcmd 'alacritty -e sh -c'
 map global user k ': terminal kakhack kak -c %val{session}<ret>' -docstring 'new kakoune window working around issues it has with i3wm'
 
 map global user n ': new<ret>' -docstring 'new kakoune window'
-map global user s ': new edit %val{bufname}' -docstring 'edit current buffer in new window'
+map global user s ': new edit %val{bufname}<ret>' -docstring 'edit current buffer in new window'
 map global user v ': terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>' -docstring 'Open in nvim'
 
 addhl global/ show-whitespaces -spc ' ' -lf ' '
 
-map global user e ': echo %sh{gnome-terminal -- sh -c "source ~/.profile && ranger $(dirname \\"$kak_buffile\\")"}<ret>' -docstring 'open directory of current file in ranger'
+map global user e ': terminal ranger "--selectfile=%val{buffile}"<ret>' -docstring 'open directory of current file in ranger'
 
 set global grepcmd 'rg --hidden --column '
 
