@@ -41,7 +41,7 @@ export PONYSAY_TRUNCATE_HEIGHT=1
 
 export QT_QPA_PLATFORMTHEME='gtk2'
 
-export RUST_SRC_PATH=$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/
+export RUST_SRC_PATH=$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/
 
 export FZF_CTRL_T_COMMAND="rg --hidden --files"
 
