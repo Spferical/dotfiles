@@ -139,3 +139,6 @@ fi
 # mem use and page fault info for time
 # from burntsushi -- https://news.ycombinator.com/item?id=19525109
 TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
+
+# I think gpg used to use pinentry-gnome3 on fedora, but it seems broken now.
+export GPG_TTY=$(tty)
