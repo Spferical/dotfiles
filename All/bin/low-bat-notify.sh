@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # low battery in %
 LOW_BATTERY="10"
