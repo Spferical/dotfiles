@@ -1,34 +1,17 @@
-
-# Should you change your keyboard layout somewhen, delete
-# this file and re-run i3-config-wizard(1).
-#
-
-# i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
 font pango:Inconsolata 16
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 bindsym $mod+d exec bemenu-run --fn 'Inconsolata 16'
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='bemenu --fn "Inconsolata 16"'
 
 # change focus
 bindsym $mod+h focus left
@@ -98,10 +81,8 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'Exit?' -b 'Yes' 'swaymsg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -169,23 +150,22 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
 bindsym $mod+Shift+t exec --no-startup-id touchpad-toggle.sh
 bindsym Print exec GRIM_DEFAULT_DIR=~/Pictures/ grim
 bindsym $mod+t exec thunar
-bindsym $mod+Shift+f exec i3-sensible-terminal -e "ranger"
-bindsym $mod+Shift+m exec i3-sensible-terminal -e "bashmount"
-bindsym $mod+Ctrl+h exec xscreensaver-command -lock && systemctl hibernate
+bindsym $mod+Shift+f exec alacritty -e "ranger"
+bindsym $mod+Shift+m exec alacritty -e "bashmount"
 bindsym $mod+b exec --no-startup-id random-background
 
 bindsym $mod+Ctrl+s move scratchpad
 bindsym $mod+Shift+s scratchpad show
 
 # vimwiki
-bindsym $mod+Ctrl+v exec i3-sensible-terminal -e "kc -e 'wiki index.md'"
-bindsym $mod+Ctrl+j exec i3-sensible-terminal -e "kc -e MakeJournalNote"
+bindsym $mod+Ctrl+v exec alacritty -e "kc -e 'wiki index.md'"
+bindsym $mod+Ctrl+j exec alacritty -e "kc -e MakeJournalNote"
 # ideas
-bindsym $mod+Ctrl+i exec urxvt -e nvim ~/Sync/vimwiki/Ideas.wiki
+bindsym $mod+Ctrl+i exec alacritty -e nvim ~/Sync/vimwiki/Ideas.wiki
 
-exec --no-startup-id amixer -D pulse sset Capture nocap
-bindsym --no-repeat Alt_R exec play ~/.config/sway/bleep.ogg & amixer -D pulse sset Capture cap
-bindsym --release Alt_R exec play ~/.config/sway/bloop.ogg & amixer -D pulse sset Capture nocap
+exec --no-startup-id amixer sset Capture nocap
+bindsym --no-repeat Alt_R exec play ~/.config/sway/bleep.ogg & amixer sset Capture cap
+bindsym --release Alt_R exec play ~/.config/sway/bloop.ogg & amixer sset Capture nocap
 
 # 0px Border Windows
 for_window [class="chrome"] border none
@@ -199,33 +179,15 @@ exec --no-startup-id dunst
 for_window [title="screenkey"] floating enable;border none; focus mode_toggle
 
 exec gammastep -l 42.36:-71.09 -t 6500:3500
-exec_always --no-startup-id set-touchpad-settings
-exec volumeicon
 exec_always --no-startup-id random-background
-
-# renaming workspaces
-bindsym $mod+Ctrl+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
 # rename starting workspace
 exec --no-startup-id swaymsg 'rename workspace to "1:"'
 
-# compton
-exec --no-startup-id compton --unredir-if-possible
-
 #dropbox
 exec dropbox
 
-# for networkmanager
-# nm /might/ require gnome-keyring-daemon or else randomly disconnect
-exec gnome-keyring-daemon
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec nm-applet --sm-disable
-
 exec --no-startup-id low-bat-notify.sh
-
-for_window [class="openhexagon.x86_64"] floating enable; border none; focus mode_toggle
-
-for_window [class="UE4Editor"] floating enable
 
 bar {
    status_command i3blocks
