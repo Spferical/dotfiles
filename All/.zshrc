@@ -134,6 +134,10 @@ if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
 elif [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
     # fedora
     source /usr/share/fzf/shell/key-bindings.zsh
+elif [ -n "${commands[fzf-share]}" ]; then
+    # nixos
+    source "$(fzf-share)/key-bindings.zsh"
+    source "$(fzf-share)/completion.zsh"
 fi
 
 # mem use and page fault info for time
