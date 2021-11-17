@@ -51,8 +51,7 @@ label=
 interval=30
 color=#77a7e5
 
-[load_average]
-command=zsh -c 'l=`cut -d " " -f1 /proc/loadavg`; echo $l\\n$l; test $l -gt `nproc` && exit 33;'
+[loadavg]
 interval=1
 color=#f854f8
 label=

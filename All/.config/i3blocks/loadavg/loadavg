@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+l=`cut -d " " -f1 /proc/loadavg`
+echo $l\\n$l
+test $(cut -d. -f1 <<< $l) -gt `nproc` && exit 33 || exit 0
