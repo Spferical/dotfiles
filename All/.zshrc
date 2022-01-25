@@ -79,8 +79,7 @@ case $TERM in
   ;;
 esac
 
-# z
-. ~/bin/thirdparty/z.sh
+eval "$(zoxide init zsh)"
 
 # nicer defaults
 eval $(dircolors)
