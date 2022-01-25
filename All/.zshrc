@@ -1,4 +1,4 @@
-HISTFILE=~/.histfile
+HISTFILE=~/.bighistfile
 HISTSIZE=100000000000000
 SAVEHIST=100000000000000000
 setopt appendhistory autocd extendedglob nomatch notify extendedhistory
