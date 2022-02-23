@@ -162,8 +162,8 @@ bindsym $mod+Ctrl+s move scratchpad
 bindsym $mod+Shift+s scratchpad show
 
 # vimwiki
-bindsym $mod+Ctrl+v exec alacritty -e "kc -e 'wiki index.md'"
-bindsym $mod+Ctrl+j exec alacritty -e "kc -e MakeJournalNote"
+bindsym $mod+Ctrl+v exec alacritty -e kc -e wiki index.md
+bindsym $mod+Ctrl+j exec alacritty -e kc -e MakeJournalNote
 # ideas
 bindsym $mod+Ctrl+i exec alacritty -e nvim ~/Sync/vimwiki/Ideas.wiki
 
@@ -189,7 +189,7 @@ exec_always --no-startup-id random-background
 exec --no-startup-id swaymsg 'rename workspace to "1:"'
 
 #dropbox
-exec dropbox
+exec dropbox start
 
 exec --no-startup-id low-bat-notify.sh
 
