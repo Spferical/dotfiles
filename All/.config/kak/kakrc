@@ -120,7 +120,7 @@ map global user D '! date +"%a %d %b %Y"<ret>' -docstring 'Insert date'
 
 map global user B ':%sh{black $kak_opt_buffile}' -docstring 'format with Black'
 
-map global user E ': lsp find-error<ret>'
+map global user E ': lsp find-error<ret>' -docstring 'Jump to LSP error'
 
 map global goto H h
 map global goto J j
