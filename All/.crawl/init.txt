@@ -88,3 +88,6 @@ tile_full_screen = false
 view_max_width = 81
 view_max_height = 71
 use_fake_cursor = false
+travel_delay = -1
+show_travel_trail=true
+rest_delay = -1
