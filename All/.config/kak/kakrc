@@ -100,8 +100,6 @@ lsp-inlay-diagnostics-enable global
 require-module x11
 set global termcmd 'alacritty -e sh -c'
 
-map global user k ': terminal kakhack kak -c %val{session}<ret>' -docstring 'new kakoune window working around issues it has with i3wm'
-
 map global user n ': new<ret>' -docstring 'new kakoune window'
 map global user s ': new edit %val{bufname}<ret>' -docstring 'edit current buffer in new window'
 map global user v ': terminal nvim "+%val{cursor_line}" "%val{buffile}"<ret>' -docstring 'Open in nvim'
