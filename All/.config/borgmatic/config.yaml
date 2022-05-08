@@ -40,6 +40,7 @@ location:
         - /home/matthew/.cargo
         - /home/matthew/.googleearth/Cache/
         - /home/matthew/.nuget
+        - /home/matthew/.local/share/amt/
 
     # Exclude directories that contain a CACHEDIR.TAG file. See
     # http://www.brynosaurus.com/cachedir/spec.html for details.
