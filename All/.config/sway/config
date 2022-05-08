@@ -221,10 +221,10 @@ input type:keyboard {
 input type:pointer {
     accel_profile flat
     pointer_accel 0
+    dwt disabled
 }
 
 input type:touchpad {
-    accel_profile flat
     tap enabled
-    pointer_accel 0
+    dwt disabled
 }
