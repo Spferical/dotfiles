@@ -7,6 +7,10 @@ INTERFACE="$(ip route get 8.8.8.8 | grep -Po '(?<=(dev )).*(?= src)')"
 
 if [[ "${INSTANCE}" = "" ]]; then
   INSTANCE="${INTERFACE};both"
+elif [[ "${INSTANCE}" = "in" ]]; then
+  INSTANCE="${INTERFACE};in"
+elif [[ "${INSTANCE}" = "out" ]]; then
+  INSTANCE="${INTERFACE};out"
 fi
 
 DISPLAY=$(echo "${INSTANCE}" | awk -F ';' '{print $2}')

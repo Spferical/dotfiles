@@ -31,18 +31,17 @@ color=#ffad33
 command=iwgetid -r
 color=#f8fc50
 interval=1
-separator=false
 
 [bandwidth4]
 color=#f8fc50
-instance=wlp3s0;in
+instance=in
 interval=5
 label=▼
 separator=false
 
 [bandwidth4]
 color=#f8fc50
-instance=wlp3s0;out
+instance=out
 interval=5
 label=▲
 
