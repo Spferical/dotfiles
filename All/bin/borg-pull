@@ -39,7 +39,8 @@ def main():
     remote_socat_cmd = f'bash -c "socat - UNIX-CONNECT:{remote_sock}"'
 
     # Use ssh to connect the local socket and a remote socket and run borg.
-    remote_cmd = [f"BORG_RSH='{remote_socat_cmd}'", "borg", *sys.argv[2:]]
+    remote_args = [f'"{arg}"' for arg in sys.argv[2:]]
+    remote_cmd = [f"BORG_RSH='{remote_socat_cmd}'", "borg", *remote_args]
     ssh_cmd = ["ssh", host, "-R", f"{remote_sock}:{local_sock}"] + remote_cmd
     result = subprocess.run(
         ssh_cmd,
