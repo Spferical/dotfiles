@@ -71,7 +71,7 @@ map global user C '! git -C ~/Dropbox/vimwiki add -A && git -C ~/Dropbox/vimwiki
 
 plug "andreyorst/fzf.kak" config %{
     map global user f ': fzf-mode<ret>' -docstring 'fzf mode'
-} defer "fzf" %{
+} defer "fzf-file" %{
     # custom rg options so that we don't follow symlinks
     set-option global fzf_file_command 'rg --hidden --files'
     evaluate-commands %sh{
