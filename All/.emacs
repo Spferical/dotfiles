@@ -9,8 +9,6 @@
 (eval-when-compile
   (require 'use-package))
 
-(setq shell-file-name "/bin/bash")
-
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t)
