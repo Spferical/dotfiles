@@ -1,0 +1,11 @@
+border-color=#444444
+
+[urgency=normal]
+background-color=#242424
+text-color=#e3e0d7
+
+[urgency=low]
+text-color=#9c998e
+
+[urgency=critical]
+text-color=#FF3333
