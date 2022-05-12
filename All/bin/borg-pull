@@ -8,7 +8,9 @@
 import subprocess
 import tempfile
 import shutil
+import shlex
 import sys
+import os
 
 
 def main():
@@ -41,6 +43,9 @@ def main():
     # Use ssh to connect the local socket and a remote socket and run borg.
     remote_args = [f'"{arg}"' for arg in sys.argv[2:]]
     remote_cmd = [f"BORG_RSH='{remote_socat_cmd}'", "borg", *remote_args]
+    passphrase = os.getenv('BORG_PASSPHRASE')
+    if passphrase is not None:
+        remote_cmd.insert(0, f"BORG_PASSPHRASE={shlex.quote(passphrase)}")
     ssh_cmd = ["ssh", host, "-R", f"{remote_sock}:{local_sock}"] + remote_cmd
     result = subprocess.run(
         ssh_cmd,
