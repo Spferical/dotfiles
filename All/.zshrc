@@ -145,3 +145,11 @@ TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
 
 # I think gpg used to use pinentry-gnome3 on fedora, but it seems broken now.
 export GPG_TTY=$(tty)
+
+fzf-git-diff-widget() {
+    LBUFFER="${LBUFFER}$(git diff --name-only | fzf -m --ansi --preview 'git diff $@ --color=always -- {-1}')"
+    zle reset-prompt
+}
+
+zle -N fzf-git-diff-widget
+bindkey '^G' fzf-git-diff-widget
