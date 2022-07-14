@@ -147,7 +147,7 @@ TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
 export GPG_TTY=$(tty)
 
 fzf-git-diff-widget() {
-    LBUFFER="${LBUFFER}$(git diff --name-only | fzf -m --ansi --preview 'git diff $@ --color=always -- {-1}')"
+    LBUFFER="${LBUFFER}$(git diff --name-only | sort -u | fzf -m --ansi --preview 'git diff $@ --color=always -- {-1}')"
     zle reset-prompt
 }
 
