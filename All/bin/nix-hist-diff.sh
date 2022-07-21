@@ -2,7 +2,7 @@
 # Like 'git log' but for nix system configurations.
 
 diff() {
-    ns=($(find /nix/var/nix/profiles/system-*-link | grep -Eo '[0-9]+' | sort -g -r))
+    ns=($(echo /nix/var/nix/profiles/system-*-link | grep -Eo '[0-9]+' | sort -g -r))
     len=${#ns[@]}
     interrupted=0
     on_interrupt() {
