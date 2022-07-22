@@ -1,5 +1,5 @@
 if [ -n "$WAYLAND_DISPLAY" ]; then
-    swaymsg output '*' background $(shuf -en1 ~/Pictures/Dtops/**) fit
+    swaymsg output '*' background $(shuf -en1 ~/Pictures/Dtops/**) fill
 else
     feh --recursive --randomize --bg-max ~/Pictures/Dtops/
 fi
