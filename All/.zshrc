@@ -65,7 +65,7 @@ fi
 bindkey '^R' history-incremental-search-backward
 
 case $TERM in
-    xterm*|rxvt*)
+    xterm*|rxvt*|alacritty)
     # Write some info to terminal title.
     # This is seen when the shell prompts for input.
     function precmd {
