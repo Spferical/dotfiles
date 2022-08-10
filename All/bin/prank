@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-trap ctrl_c INT
-
-function ctrl_c() {
-	echo "Segmentation fault"
-}
-
-find . -name "*" -type f -exec echo "removed {}" \;

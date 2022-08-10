@@ -23,11 +23,6 @@ export TERMINAL=alacritty
 # for ranger
 export TERMCMD=alacritty
 
-# darwinia/multiwinia use this, and default to oss
-# which makes the sound in the menus weird
-# so tell it to use alsa
-export SDL_AUDIODRIVER=alsa
-
 # cache pip downloads
 # So I don't have to redownload matplotlib ever again
 export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache
@@ -35,9 +30,6 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip-download-cache
 # python rc file for running when python starts
 # stuff like python shell completion
 export PYTHONSTARTUP="$HOME/.pyrc"
-
-#always truncate ponysay height, even when not in TTY
-export PONYSAY_TRUNCATE_HEIGHT=1
 
 export QT_QPA_PLATFORMTHEME='gtk2'
 

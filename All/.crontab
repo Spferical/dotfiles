@@ -1,2 +1,0 @@
-* * * * * DISPLAY=:0.0 XAUTHORITY=$HOME/.Xauthority $HOME/bin/low-bat-notify.sh
-@daily DISPLAY=:0.0 XAUTHORITY=$HOME/Xauthority $HOME/bin/random-background
