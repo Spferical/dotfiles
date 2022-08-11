@@ -191,6 +191,7 @@ command = "lua-language-server"
 [language.lua.settings.Lua]
 # See https://github.com/sumneko/vscode-lua/blob/master/setting/schema.json
 # diagnostics.enable = true
+telemetry.enable = false
 
 [language.nim]
 filetypes = ["nim"]
