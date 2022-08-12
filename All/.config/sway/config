@@ -228,3 +228,7 @@ input type:touchpad {
     tap enabled
     dwt disabled
 }
+
+input 1452:591:Matias_Matias_Keyboard {
+    xkb_options caps:escape,altwin:swap_alt_win
+}
