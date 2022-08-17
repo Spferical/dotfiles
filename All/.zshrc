@@ -153,3 +153,11 @@ fzf-git-diff-widget() {
 
 zle -N fzf-git-diff-widget
 bindkey '^G' fzf-git-diff-widget
+
+fzf-git-branch-widget() {
+    LBUFFER="${LBUFFER}$(git for-each-ref refs/heads --format='%(refname:short)' --sort='-committerdate' | grep -o -E '\S.*\S|\S' | fzf -m --ansi --preview 'git show ${-1} --color=always')"
+    zle reset-prompt
+}
+
+zle -N fzf-git-branch-widget
+bindkey '^B' fzf-git-branch-widget
