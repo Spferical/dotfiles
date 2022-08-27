@@ -46,7 +46,7 @@ good_bg = "#282828"
 
 [[block]]
 block = "net"
-format = "{ssid} {speed_down} {speed_up}"
+format = "{ssid} {speed_down;K} {speed_up;K}"
 
 [block.theme_overrides]
 idle_fg = "#f8fc50"
