@@ -135,9 +135,9 @@ args = ["--stdio"]
 
 [language.javascript]
 filetypes = ["javascript"]
-roots = [".flowconfig"]
-command = "flow"
-args = ["lsp"]
+roots = ["package.json"]
+command = "typescript-language-server"
+args = ["--stdio"]
 
 [language.json]
 filetypes = ["json"]
