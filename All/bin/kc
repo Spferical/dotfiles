@@ -3,19 +3,10 @@
 unset GNOME_TERMINAL_SCREEN
 
 kc() {
-    local sessions="$(kak -l | grep -v dead)"
-    if [ -n "$sessions" ]
-    then
-        local num_sessions="$(echo \"$sessions\" | wc -w)"
-        if [ "$num_sessions" -gt 1 ]
-        then
-            echo "$num_sessions running sessions:"
-            echo "$sessions"
-            exit 1
-        fi
-        kak -c "$sessions" "$@"
+    if kak -l | grep '^main$' > /dev/null; then
+        kak -c main "${@}"
     else
-        kak "$@"
+        kak -s main "${@}"
     fi
 }
 
