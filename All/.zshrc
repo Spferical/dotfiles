@@ -61,9 +61,6 @@ elif [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlightin
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-# Ctrl+r history search
-bindkey '^R' history-incremental-search-backward
-
 case $TERM in
     xterm*|rxvt*|alacritty)
     # Write some info to terminal title.
@@ -83,28 +80,26 @@ eval "$(zoxide init zsh)"
 
 # nicer defaults
 eval $(dircolors)
-alias ls='ls -F --color=auto'
 alias grep='grep --colour=auto'
 alias pacman='pacman --color=auto'
 alias less="less -R" # output color codes
-alias namemaker="shuf -n 2 /usr/share/dict/words | tr -dc 'A-Za-z0-9'"
 function define {
 	wn "$1" -over
 }
+
+# ls alias
+alias ls='ls -F --color=auto'
 alias cls='clear && exa'
-
-# common ls alias
 alias ll='exa -l'
-
 #ls, showing only directories
 alias lsd='exa -d */'
-
-alias pe="ps -e"
 alias l=exa
 alias lstr='exa --sort time'
-
 # ls'ing hidden files
 alias lh='exa -a | egrep "^\."'
+alias sl=exa
+
+alias pe="ps -e"
 
 # du files and sort by size
 alias dh='du -ha | sort -h'
@@ -114,11 +109,9 @@ alias stats='dstat -cdnpmgs --top-bio --top-cpu --top-mem'
 alias eclim=/usr/lib/eclipse/eclim
 alias eclimd=/usr/lib/eclipse/eclimd
 
-alias mpv="mpv --hwdec=auto --vo=opengl"
+alias mpv="mpv --hwdec=auto"
 
 alias t=task
-
-alias sl=exa
 
 # edit command in editor
 autoload -U edit-command-line
@@ -146,18 +139,18 @@ TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
 # I think gpg used to use pinentry-gnome3 on fedora, but it seems broken now.
 export GPG_TTY=$(tty)
 
+# ^G to fzf changed files in git
 fzf-git-diff-widget() {
     LBUFFER="${LBUFFER}$(git diff --name-only | sort -u | fzf -m --ansi --preview 'git diff $@ --color=always -- {-1}')"
     zle reset-prompt
 }
-
 zle -N fzf-git-diff-widget
 bindkey '^G' fzf-git-diff-widget
 
+# ^B to fzf git branches, sorted by head commit date
 fzf-git-branch-widget() {
     LBUFFER="${LBUFFER}$(git for-each-ref refs/heads --format='%(refname:short)' --sort='-committerdate' | grep -o -E '\S.*\S|\S' | fzf -m --ansi --preview 'git show ${-1} --color=always')"
     zle reset-prompt
 }
-
 zle -N fzf-git-branch-widget
 bindkey '^B' fzf-git-branch-widget
