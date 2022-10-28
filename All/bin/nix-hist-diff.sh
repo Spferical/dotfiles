@@ -16,7 +16,7 @@ diff() {
         local new="/nix/var/nix/profiles/system-${ns[$i]}-link"
         local newdate
         newdate=$(stat -c %y "${new}")
-        echo "${new} built ${newdate})"
+        echo "${new} built ${newdate}"
         nvd --color=always diff "${old}" "${new}"
     done
 }
