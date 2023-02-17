@@ -116,7 +116,9 @@ map global user q '| par -w $kak_opt_autowrap_column<ret>' -docstring 'paragraph
 
 map global user D '! date +"%a %d %b %Y"<ret>' -docstring 'Insert date'
 
-map global user B ':%sh{black $kak_opt_buffile}' -docstring 'format with Black'
+define-command -hidden format-with-black %{ execute-keys -draft '%<|>black -<ret>' }
+
+map global user B ": format-with-black<ret>" -docstring 'format with Black'
 
 map global user E ': lsp find-error<ret>' -docstring 'Jump to LSP error'
 
