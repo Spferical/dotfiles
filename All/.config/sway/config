@@ -155,7 +155,7 @@ bindsym Print exec GRIM_DEFAULT_DIR=~/Pictures/ grim -o $(swaymsg -t get_outputs
 bindsym $mod+t exec thunar
 bindsym $mod+Shift+f exec alacritty -e "ranger"
 bindsym $mod+Shift+m exec alacritty -e "bashmount"
-bindsym $mod+b exec --no-startup-id random-background
+bindsym $mod+b exec --no-startup-id ~/bin/random-background
 
 bindsym $mod+Ctrl+s move scratchpad
 bindsym $mod+Shift+s scratchpad show
