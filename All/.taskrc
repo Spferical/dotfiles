@@ -24,9 +24,4 @@ data.location=~/.task
 #include /usr/share/doc/task/rc/dark-violets-256.theme
 #include /usr/share/doc/task/rc/dark-yellow-green.theme
 #include /usr/share/doc/task/rc/dark-gray-256.theme
-
-taskd.server=freecinc.com:53589
-taskd.key=\/home\/matthew\/.task\/freecinc_15beddab.key.pem
-taskd.certificate=\/home\/matthew\/.task\/freecinc_15beddab.cert.pem
-taskd.ca=\/home\/matthew\/.task\/freecinc_15beddab.ca.pem
-taskd.credentials=FreeCinc\/freecinc_15beddab\/acd6540c-c109-40d7-bca2-aab337f9f8f9
+news.version=2.6.0
