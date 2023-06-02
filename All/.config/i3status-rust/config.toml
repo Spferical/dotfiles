@@ -15,6 +15,7 @@ icons = "awesome4"
 
 [[block]]
 block = "uptime"
+format = "$icon $text"
 
 [block.theme_overrides]
 idle_fg = "#e5786d"
@@ -34,6 +35,7 @@ idle_fg = "#50fc50"
 
 [[block]]
 block = "battery"
+format = "$icon $percentage"
 interval = 1
 
 [block.theme_overrides]
@@ -52,7 +54,7 @@ idle_fg = "#f8fc50"
 [[block]]
 block = "memory"
 format = "$icon$mem_used.eng(w:3,u:B,p:M)"
-format_alt = " $icon_swap$swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M) "
+format_alt = "$icon_swap$swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M)"
 
 [block.theme_overrides]
 idle_fg = "#77a7e5"
@@ -69,6 +71,7 @@ good_fg = "#f854f8"
 
 [[block]]
 block = "sound"
+format = "$icon{$volume.eng(w:2)|}"
 
 [block.theme_overrides]
 idle_fg = "#50fcf8"
