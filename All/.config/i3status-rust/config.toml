@@ -1,5 +1,5 @@
 [theme]
-name = "gruvbox-dark"
+theme = "gruvbox-dark"
 [theme.overrides]
 idle_bg = "#282828"
 idle_fg = "#ebdbb2"
@@ -11,7 +11,7 @@ warning_bg = "#282828"
 warning_fg = "#fb4934"
 
 [icons]
-name = "awesome"
+icons = "awesome4"
 
 [[block]]
 block = "uptime"
@@ -22,14 +22,12 @@ idle_fg = "#e5786d"
 [[block]]
 block = "disk_space"
 path = "/"
-alias = "/"
 info_type = "available"
-unit = "GB"
+alert_unit = "GB"
 interval = 1
 warning = 20
-alert = 0
-alert_absolute = true
-format = "{path}{available}"
+alert = 10
+format = "/ $available.eng(w:2)"
 
 [block.theme_overrides]
 idle_fg = "#50fc50"
@@ -46,16 +44,15 @@ good_bg = "#282828"
 
 [[block]]
 block = "net"
-format = "{ssid} {speed_down;K} {speed_up;K}"
+format = "$ssid ^icon_net_down$speed_down.eng(prefix:K) ^icon_net_up$speed_up.eng(prefix:K)"
 
 [block.theme_overrides]
 idle_fg = "#f8fc50"
 
 [[block]]
 block = "memory"
-display_type = "memory"
-format_mem = "{mem_used}"
-format_swap = "{swap_used}"
+format = "$icon$mem_used.eng(w:3,u:B,p:M)"
+format_alt = " $icon_swap$swap_free.eng(w:3,u:B,p:M)/$swap_total.eng(w:3,u:B,p:M) "
 
 [block.theme_overrides]
 idle_fg = "#77a7e5"
@@ -64,7 +61,7 @@ good_fg = "#77a7e5"
 [[block]]
 block = "load"
 interval = 1
-format = "{1m}"
+format = "$icon$1m.eng(w:4)"
 
 [block.theme_overrides]
 idle_fg = "#f854f8"
@@ -79,4 +76,4 @@ idle_fg = "#50fcf8"
 [[block]]
 block = "time"
 interval = 1
-format = "%Y-%m-%d %H:%M:%S"
+format = "$icon $timestamp.datetime(f:'%Y-%m-%d %H:%M:%S')"
