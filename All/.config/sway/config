@@ -169,6 +169,8 @@ bindsym --no-repeat Alt_R exec play ~/.config/sway/bleep.ogg & amixer sset Captu
 bindsym --release Alt_R exec play ~/.config/sway/bloop.ogg & amixer sset Capture nocap
 bindsym Control_R exec play ~/.config/sway/bloop.ogg & amixer sset Capture nocap
 
+bindsym $mod+Shift+d exec ~/bin/toggledarktheme
+
 # 0px Border Windows
 for_window [class="chrome"] border none
 for_window [class="Firefox"] border none

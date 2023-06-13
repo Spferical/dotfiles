@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+old_theme="$(xfconf-query -c xsettings -p /Net/ThemeName)"
+case "${old_theme}" in
+    "Adwaita") new_theme="Adwaita-dark" ;;
+    *) new_theme="Adwaita" ;;
+esac
+xfconf-query -c xsettings -p /Net/ThemeName -s "${new_theme}"
