@@ -163,8 +163,6 @@ bindsym $mod+Shift+s scratchpad show
 # vimwiki
 bindsym $mod+Ctrl+v exec alacritty -e kc -e wiki index.md
 bindsym $mod+Ctrl+j exec alacritty -e kc -e MakeJournalNote
-# ideas
-bindsym $mod+Ctrl+i exec alacritty -e nvim ~/Sync/vimwiki/Ideas.wiki
 
 exec --no-startup-id amixer sset Capture nocap
 bindsym --no-repeat Alt_R exec play ~/.config/sway/bleep.ogg & amixer sset Capture cap
