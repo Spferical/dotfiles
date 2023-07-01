@@ -142,7 +142,7 @@ export GPG_TTY=$(tty)
 
 # ^G to fzf changed files in git
 fzf-git-diff-widget() {
-    LBUFFER="${LBUFFER}$(git diff --name-only | sort -u | fzf -m --ansi --preview 'git diff $@ --color=always -- {-1}')"
+    LBUFFER="${LBUFFER}$(git diff --name-only | sort -u | awk -v prefix=\"$(git rev-parse --show-toplevel)/\" '$0=prefix$0' - | xargs realpath --relative-to="${PWD}" | fzf -m --ansi --preview 'git diff $@ --color=always -- {-1}')"
     zle reset-prompt
 }
 zle -N fzf-git-diff-widget
