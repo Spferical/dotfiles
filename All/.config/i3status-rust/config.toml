@@ -46,7 +46,7 @@ good_bg = "#282828"
 
 [[block]]
 block = "net"
-format = "$ssid ^icon_net_down$speed_down.eng(prefix:K) ^icon_net_up$speed_up.eng(prefix:K)"
+format = "{$ssid|$device} ^icon_net_down$speed_down.eng(prefix:K) ^icon_net_up$speed_up.eng(prefix:K)"
 
 [block.theme_overrides]
 idle_fg = "#f8fc50"
