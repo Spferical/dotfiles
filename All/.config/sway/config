@@ -137,7 +137,7 @@ bindsym $mod+Shift+b mode "brightness"
 #lock screensaver
 bindsym $mod+Shift+x exec swaylock -e -c000000
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP && dbus-update-activation-environment
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP && dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
 
 # swaylock on idle
 exec swayidle timeout 3600 'swaylock -e -c000000' after-resume 'swaylock -e -c000000' lock 'swaylock -e -c000000'
