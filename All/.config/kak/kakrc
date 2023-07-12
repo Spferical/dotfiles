@@ -121,8 +121,3 @@ define-command -hidden format-with-black %{ execute-keys -draft '%<|>black -<ret
 map global user B ": format-with-black<ret>" -docstring 'format with Black'
 
 map global user E ': lsp find-error<ret>' -docstring 'Jump to LSP error'
-
-map global goto H h
-map global goto J j
-map global goto K k
-map global goto L l
