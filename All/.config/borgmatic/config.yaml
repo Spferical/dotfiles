@@ -28,6 +28,7 @@ location:
         - "/home/matthew/dev/*/target/release"
         - "__pycache__"
         - "*.pyc"
+        - /home/matthew/.var/app/
         - /home/matthew/.local/share/Steam/
         - /home/matthew/Games/
         - /home/matthew/Downloads
@@ -41,6 +42,7 @@ location:
         - /home/matthew/.googleearth/Cache/
         - /home/matthew/.nuget
         - /home/matthew/.local/share/amt/
+        - /home/matthew/dev/llama.cpp/models/
 
     # Exclude directories that contain a CACHEDIR.TAG file. See
     # http://www.brynosaurus.com/cachedir/spec.html for details.
