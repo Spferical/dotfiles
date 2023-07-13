@@ -142,7 +142,7 @@ export GPG_TTY=$(tty)
 
 # ^G to fzf changed files in git
 fzf-git-diff-widget() {
-    LBUFFER="${LBUFFER}$(git diff --name-only | sort -u | awk -v prefix=\"$(git rev-parse --show-toplevel)/\" '$0=prefix$0' - | xargs realpath --relative-to="${PWD}" | fzf -m --ansi --preview 'git diff $@ --color=always -- {-1}')"
+    LBUFFER="${LBUFFER}$(git diff --name-only | sort -u | awk -v prefix=\"$(git rev-parse --show-toplevel)/\" '$0=prefix$0' - | xargs realpath --relative-to="${PWD}" | fzf -m --ansi --preview --height 40% --reverse 'git diff $@ --color=always -- {-1}')"
     zle reset-prompt
 }
 zle -N fzf-git-diff-widget
@@ -150,8 +150,30 @@ bindkey '^G' fzf-git-diff-widget
 
 # ^B to fzf git branches, sorted by head commit date
 fzf-git-branch-widget() {
-    LBUFFER="${LBUFFER}$(git for-each-ref refs/heads --format='%(refname:short)' --sort='-committerdate' | grep -o -E '\S.*\S|\S' | fzf -m --ansi --preview 'git show ${-1} --color=always')"
+    LBUFFER="${LBUFFER}$(git for-each-ref refs/heads --format='%(refname:short)' --sort='-committerdate' | grep -o -E '\S.*\S|\S' | fzf -m --ansi --preview --height 40% --reverse 'git show ${-1} --color=always')"
     zle reset-prompt
 }
 zle -N fzf-git-branch-widget
 bindkey '^B' fzf-git-branch-widget
+
+# ^E to fzf files by ripgrep search
+fzf-rg-widget() {
+    # Based on ff from https://github.com/junegunn/fzf/wiki/examples#searching-file-contents
+    local RG_DEFAULT_COMMAND="rg --files-with-matches --hidden"
+    local FZF_DEFAULT_COMMAND="rg --files" fzf
+    selected=$(
+        fzf \
+            --multi \
+            --ansi \
+            --disabled \
+            --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
+            --height 40% \
+            --reverse \
+            --preview "rg --pretty --context 2 {q} {}" \
+            | cut -d":" -f1,2
+    )
+    LBUFFER="${LBUFFER}${selected}"
+    zle reset-prompt
+}
+zle -N fzf-rg-widget
+bindkey '^E' fzf-rg-widget
