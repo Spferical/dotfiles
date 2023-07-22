@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+main() {
+    # Check if either sway or i3 is running
+    if ! pgrep -x 'i3|sway' > /dev/null; then
+        echo "Neither i3 or sway is currently running."
+        return 1
+    fi
+
+    # Use either swaymsg or i3-msg depending on what is available
+    local msg_command
+    if command -v swaymsg > /dev/null; then
+        msg_command="swaymsg"
+    elif command -v i3-msg > /dev/null; then
+        msg_command="i3-msg"
+    else
+        echo "Neither swaymsg or i3-msg is available."
+        return 1
+    fi
+
+    # Get the window list
+    declare -A window_map
+    while IFS= read -r id && IFS= read -r name; do
+        # Only add the window if it has a name
+        if [[ -n $name && $name != "null" ]]; then
+            window_map[$name]=$id
+        fi
+    done < <($msg_command -t get_tree | jq -r '.. | select(.type?) | select(.type=="con") | .id, .name')
+
+    # Select a window using bemenu
+    local window_name
+    window_name=$(printf "%s\n" "${(@k)window_map}" | bemenu -l 10)
+
+    # If a window was selected, focus it
+    local window_id=${window_map[$window_name]}
+    if [ -n "$window_id" ]; then
+        $msg_command "[con_id=\"$window_id\"]" focus
+    fi
+}
+
+main

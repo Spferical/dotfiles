@@ -12,6 +12,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 bindsym $mod+d exec bemenu-run --fn 'Inconsolata 16'
+bindsym $mod+Shift+a exec ~/bin/bemenu-switch-window
 
 # change focus
 bindsym $mod+h focus left
