@@ -1,41 +1,55 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env python3
 
-main() {
-    # Check if either sway or i3 is running
-    if ! pgrep -x 'i3|sway' > /dev/null; then
-        echo "Neither i3 or sway is currently running."
-        return 1
-    fi
+import json
+import subprocess
+import shlex
+import shutil
+from collections import namedtuple
 
+Window = namedtuple("Window", "workspace id name")
+
+
+def get_windows(node, workspace=None):
+    if node.get("type") == "workspace":
+        workspace = node.get("num")
+
+    windows = []
+
+    if node.get("type") == "con" and node.get("name") is not None:
+        windows.append(Window(workspace, node.get("id"), node.get("name")))
+
+    for child in node.get("nodes", []):
+        windows.extend(get_windows(child, workspace))
+
+    return windows
+
+
+def main():
     # Use either swaymsg or i3-msg depending on what is available
-    local msg_command
-    if command -v swaymsg > /dev/null; then
-        msg_command="swaymsg"
-    elif command -v i3-msg > /dev/null; then
-        msg_command="i3-msg"
-    else
-        echo "Neither swaymsg or i3-msg is available."
-        return 1
-    fi
+    msg_command = shutil.which("swaymsg") or shutil.which("i3-msg")
 
-    # Get the window list
-    declare -A window_map
-    while IFS= read -r id && IFS= read -r name; do
-        # Only add the window if it has a name
-        if [[ -n $name && $name != "null" ]]; then
-            window_map[$name]=$id
-        fi
-    done < <($msg_command -t get_tree | jq -r '.. | select(.type?) | select(.type=="con") | .id, .name')
+    if msg_command is None:
+        print("Neither swaymsg or i3-msg is available.")
+        return
+
+    result = subprocess.run([msg_command, "-t", "get_tree"], stdout=subprocess.PIPE)
+    tree = json.loads(result.stdout.decode("utf-8"))
+
+    windows = get_windows(tree)
+    windows = sorted(windows, key=lambda w: w.workspace)
 
     # Select a window using bemenu
-    local window_name
-    window_name=$(printf "%s\n" "${(@k)window_map}" | bemenu -l 10)
+    window_name = subprocess.run(
+        ["bemenu", "-l", "10"],
+        input="\n".join(f"{w.workspace} {w.name}" for w in windows),
+        stdout=subprocess.PIPE,
+        text=True,
+    ).stdout.strip()
 
-    # If a window was selected, focus it
-    local window_id=${window_map[$window_name]}
-    if [ -n "$window_id" ]; then
-        $msg_command "[con_id=\"$window_id\"]" focus
-    fi
-}
+    if window_name:
+        window = next(w for w in windows if f"{w.workspace} {w.name}" == window_name)
+        subprocess.run([msg_command, f'[con_id="{window.id}"]', "focus"])
 
-main
+
+if __name__ == "__main__":
+    main()
