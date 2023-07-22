@@ -177,3 +177,14 @@ fzf-rg-widget() {
 }
 zle -N fzf-rg-widget
 bindkey '^E' fzf-rg-widget
+
+fzf-zoxide-dir-widget() {
+    local selected_dir
+    selected_dir=$(zoxide query -l | fzf -m --ansi --height 40% --reverse --preview 'ls -A --color=always {}')
+    if [ -n "$selected_dir" ]; then
+        LBUFFER="${LBUFFER}${selected_dir}"
+    fi
+    zle reset-prompt
+}
+zle -N fzf-zoxide-dir-widget
+bindkey '^Z' fzf-zoxide-dir-widget
