@@ -189,7 +189,7 @@ exec_always --no-startup-id random-background
 exec --no-startup-id swaymsg 'rename workspace to "1:"'
 
 #dropbox
-exec dropbox start
+exec maestral start
 
 exec --no-startup-id low-bat-notify.sh
 
