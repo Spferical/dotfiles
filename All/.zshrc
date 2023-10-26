@@ -84,35 +84,26 @@ eval $(dircolors)
 alias grep='grep --colour=auto'
 alias pacman='pacman --color=auto'
 alias less="less -R" # output color codes
-function define {
-	wn "$1" -over
-}
 
-# ls alias
 alias ls='ls -F --color=auto'
 alias cls='clear && exa'
 alias ll='exa -l'
-#ls, showing only directories
-alias lsd='exa -d */'
+alias lsd='exa -d */' # ls, showing only directories
 alias l=exa
-alias lstr='exa --sort time'
-# ls'ing hidden files
-alias lh='exa -a | egrep "^\."'
 alias sl=exa
+alias lstr='exa --sort time'
+alias lh='exa -a | egrep "^\."' # ls'ing hidden files
 
 alias pe="ps -e"
-
-# du files and sort by size
-alias dh='du -ha | sort -h'
-
+alias dh='du -ha | sort -h' # du files and sort by size
 alias stats='dstat -cdnpmgs --top-bio --top-cpu --top-mem'
-
-alias eclim=/usr/lib/eclipse/eclim
-alias eclimd=/usr/lib/eclipse/eclimd
-
 alias mpv="mpv --hwdec=auto"
-
 alias t=task
+alias g=git
+
+function define {
+	wn "$1" -over
+}
 
 # edit command in editor
 autoload -U edit-command-line
