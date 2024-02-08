@@ -212,8 +212,15 @@ client.focused_inactive #242424 #242424 #e3e0d7 #484e50
 client.unfocused        #242424 #242424 #e3e0d7 #292d2e
 client.urgent           #2f343a #900000 #e3e0d7 #900000
 
-output eDP-1 scale 1
+output eDP-1 scale 2
 output HDMI-A-2 scale 1
+output eDP-1 position 1920 0
+output DP-1 position 0 0
+output DP-2 position 0 0
+output DP-3 position 0 0
+output DP-4 position 0 0
+output DP-5 position 0 0
+output DP-6 position 0 0
 
 input type:keyboard {
     xkb_options caps:escape
@@ -232,4 +239,9 @@ input type:touchpad {
 
 input 1452:591:Matias_Matias_Keyboard {
     xkb_options caps:escape,altwin:swap_alt_win
+}
+
+input 1133:16469:Logitech_Wireless_Mouse {
+    accel_profile "flat"
+    pointer_accel 0.5
 }
