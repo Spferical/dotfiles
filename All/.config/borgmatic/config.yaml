@@ -14,7 +14,7 @@ location:
     # or port.
     repositories:
         - /run/media/matthew/backup/balrog
-        - rl1huyxi@rl1huyxi.repo.borgbase.com:repo
+        - ssh://rl1huyxi@rl1huyxi.repo.borgbase.com/./repo
 
     # Any paths matching these patterns are excluded from backups.
     # Globs and tildes are expanded. See the output of "borg help
@@ -197,16 +197,16 @@ retention:
     # keep_hourly: 24
 
     # Number of daily archives to keep.
-    keep_daily: 9999
+    keep_daily: 30
 
     # Number of weekly archives to keep.
-    keep_weekly: 9999
+    keep_weekly: 52
 
     # Number of monthly archives to keep.
-    keep_monthly: 9999
+    keep_monthly: 24
 
     # Number of yearly archives to keep.
-    keep_yearly: 9999
+    keep_yearly: 99999
 
     # When pruning, only consider archive names starting with this
     # prefix.  Borg placeholders can be used. See the output of
@@ -269,7 +269,7 @@ hooks:
     # before creating a backup, run once per configuration file.
     before_backup:
         - echo "Starting a backup."
-        - ~/dev/misc/backup/backup.sh
+        #- ~/dev/misc/backup/backup.sh
 
     # List of one or more shell commands or scripts to execute
     # before pruning, run once per configuration file.
