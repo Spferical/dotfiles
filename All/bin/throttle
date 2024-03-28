@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -x
 
+cleanup() {
+    sudo rmdir "$CGROUP_PATH" 2>/dev/null || echo "Failed to rm $CGROUP_PATH" >&2
+}
+
 if [ "$#" -ne 3 ]; then
     echo "Usage: $0 <device> <I/O limit in bytes per second> <command>"
     exit 1
@@ -11,22 +15,26 @@ LIMIT=$2
 COMMAND=$3
 
 DEVICE_PATH="/sys/block/${DEVICE}/dev"
-if [ ! -f $DEVICE_PATH ]; then
+if [ ! -f "$DEVICE_PATH" ]; then
     echo "Device does not exist."
     exit 1
 fi
 
-read DEVNUM < $DEVICE_PATH
+read DEVNUM < "$DEVICE_PATH"
 DEVICE_SPEC="$DEVNUM wbps=$LIMIT"
 
 CGROUP_NAME="custom_cgroup_$$"
 CGROUP_PATH="/sys/fs/cgroup/$CGROUP_NAME"
-sudo mkdir $CGROUP_PATH || exit 1
+sudo mkdir "$CGROUP_PATH" || exit 1
 
-echo "$DEVICE_SPEC" | sudo tee $CGROUP_PATH/io.max > /dev/null || exit 2
+trap cleanup SIGINT SIGTERM
+
+echo "$DEVICE_SPEC" | sudo tee "$CGROUP_PATH/io.max" > /dev/null || exit 2
 
 COMMAND="$COMMAND" CGROUP_PATH="$CGROUP_PATH" sh -c 'echo $$ | sudo tee $CGROUP_PATH/cgroup.procs > /dev/null && bash -c "$COMMAND"'
 ret=$?
 
-sudo rmdir $CGROUP_PATH || echo "Failed to rm $CGROUP_PATH" > /dev/stderr
+cleanup
+
 exit $ret
+
