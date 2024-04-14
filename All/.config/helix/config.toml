@@ -37,3 +37,6 @@ tab = "all"
 
 [editor.soft-wrap]
 enable = true
+
+[keys.normal]
+g = { j = "goto_last_line", k = "goto_file_start" }
