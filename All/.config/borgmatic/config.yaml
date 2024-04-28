@@ -21,8 +21,8 @@ location:
     # patterns" for more details.
     exclude_patterns:
         - /home/matthew/.cache
-        - /home/matthew/.config/Riot/Cache
-        - /home/matthew/.config/Electron/Cache
+        # Lots of electron caches
+        - '/home/matthew/.config/*/Cache'
         - "/home/matthew/dev/*/target/rls"
         - "/home/matthew/dev/*/target/debug"
         - "/home/matthew/dev/*/target/release"
@@ -106,6 +106,7 @@ storage:
     # http://borgbackup.readthedocs.io/en/stable/usage/create.html
     # for details. Defaults to "lz4".
     # compression: lz4
+    compression: zstd
 
     # Remote network upload rate limit in kiBytes/second. Defaults
     # to unlimited.
