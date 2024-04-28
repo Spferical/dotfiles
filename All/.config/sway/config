@@ -164,8 +164,8 @@ bindsym $mod+Ctrl+s move scratchpad
 bindsym $mod+Shift+s scratchpad show
 
 # vimwiki
-bindsym $mod+Ctrl+v exec alacritty -e kc -e wiki index.md
-bindsym $mod+Ctrl+j exec alacritty -e kc -e MakeJournalNote
+bindsym $mod+Ctrl+v exec alacritty -e ~/bin/kc -e wiki index.md
+bindsym $mod+Ctrl+j exec alacritty -e ~/bin/kc -e MakeJournalNote
 
 exec --no-startup-id amixer sset Capture nocap
 bindsym --no-repeat Alt_R exec play ~/.config/sway/bleep.ogg & amixer sset Capture cap
