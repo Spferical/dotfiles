@@ -36,10 +36,17 @@ else
 fi
 local _wdir="$_bblue%~"
 local _code="%(?..%{$_bred%})%?"
+local _lvl=""
+for _ in $(seq 2 "${SHLVL}"); do
+    _lvl="${_lvl}*"
+done
+if [ $SHLVL -gt 1 ]; then
+    _lvl="$_yellow${_lvl}$_reset"
+fi
 
-PROMPT="$_deco┌─[$_time$_deco|$_name$_ssh$_deco|$_wdir$_deco|$_code$_deco]$prompt_newline$_deco└─>$ $_reset"
+PROMPT="$_deco┌─[$_time$_deco|$_lvl$_name$_ssh$_deco|$_wdir$_deco|$_code$_deco]$prompt_newline$_deco└─>$ $_reset"
 # keep environmental pollution down
-unset _blue _bblue _deco _bcyan _bred _time _name _yellow _reset _ssh _wdir _code
+unset _blue _bblue _deco _bcyan _bred _time _name _yellow _reset _ssh _wdir _code _lvl
 
 # for tmux: export 256color
 [ -n "$TMUX" ] && export TERM=screen-256color
