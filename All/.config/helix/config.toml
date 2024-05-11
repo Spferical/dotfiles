@@ -38,5 +38,10 @@ tab = "all"
 [editor.soft-wrap]
 enable = true
 
-[keys.normal]
-g = { j = "goto_last_line", k = "goto_file_start" }
+[keys.normal.g]
+j = "goto_last_line"
+k = "goto_file_start"
+
+[keys.normal.space]
+J = ":open ~/Dropbox/vimwiki/"
+C = ":sh git -C ~/Dropbox/vimwiki add -A && git -C ~/Dropbox/vimwiki/ commit -m \"hx commit\""
