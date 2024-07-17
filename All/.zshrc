@@ -40,9 +40,10 @@ local _lvl=""
 for _ in $(seq 2 "${SHLVL}"); do
     _lvl="${_lvl}*"
 done
-if [ $SHLVL -gt 1 ]; then
-    _lvl="$_yellow${_lvl}$_reset"
+if [[ -f /run/.toolboxenv ]]; then
+    _lvl="${_lvl}*"
 fi
+_lvl="$_yellow${_lvl}$_reset"
 
 PROMPT="$_deco┌─[$_time$_deco|$_lvl$_name$_ssh$_deco|$_wdir$_deco|$_code$_deco]$prompt_newline$_deco└─>$ $_reset"
 # keep environmental pollution down
@@ -107,6 +108,7 @@ alias stats='dstat -cdnpmgs --top-bio --top-cpu --top-mem'
 alias mpv="mpv --hwdec=auto"
 alias t=task
 alias g=git
+alias tb='SHELL=/usr/bin/zsh toolbox enter tb'
 
 function define {
 	wn "$1" -over
