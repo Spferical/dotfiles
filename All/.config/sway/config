@@ -168,9 +168,9 @@ bindsym $mod+Ctrl+v exec alacritty -e ~/bin/kc -e wiki index.md
 bindsym $mod+Ctrl+j exec alacritty -e ~/bin/kc -e MakeJournalNote
 
 exec --no-startup-id amixer sset Capture nocap
-bindsym --no-repeat Alt_R exec play ~/.config/sway/bleep.ogg & amixer sset Capture cap
-bindsym --release Alt_R exec play ~/.config/sway/bloop.ogg & amixer sset Capture nocap
-bindsym Control_R exec play ~/.config/sway/bloop.ogg & amixer sset Capture nocap
+bindsym --no-repeat Alt_R exec play -q ~/.config/sway/bleep.ogg & amixer sset Capture cap
+bindsym --release Alt_R exec play -q ~/.config/sway/bloop.ogg & amixer sset Capture nocap
+bindsym Control_R exec play -q ~/.config/sway/bloop.ogg & amixer sset Capture nocap
 
 bindsym $mod+Shift+d exec ~/bin/toggledarktheme
 
