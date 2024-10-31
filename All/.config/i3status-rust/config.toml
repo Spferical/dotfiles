@@ -71,7 +71,7 @@ good_fg = "#f854f8"
 
 [[block]]
 block = "sound"
-format = "$icon{$volume.eng(w:2)|}"
+format = "$icon{$volume.eng(w:2) $output_description|}"
 
 [block.theme_overrides]
 idle_fg = "#50fcf8"
