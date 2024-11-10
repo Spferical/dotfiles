@@ -93,7 +93,7 @@ alias grep='grep --colour=auto'
 alias pacman='pacman --color=auto'
 alias less="less -R" # output color codes
 
-alias ls='ls -F --color=auto'
+alias ls='exa -F'
 alias cls='clear && exa'
 alias ll='exa -l'
 alias lsd='exa -d */' # ls, showing only directories
