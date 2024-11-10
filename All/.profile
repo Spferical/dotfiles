@@ -38,3 +38,5 @@ export RUST_SRC_PATH=$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/li
 export FZF_CTRL_T_COMMAND="rg --hidden --files"
 
 export MOZ_ENABLE_WAYLAND=1
+
+export PIPENV_VENV_IN_PROJECT=1
