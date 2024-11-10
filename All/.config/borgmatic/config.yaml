@@ -13,6 +13,7 @@ location:
     # sequence. See ssh_command for SSH options like identity file
     # or port.
     repositories:
+        - /run/media/matthew/albackup/balrog
         - /run/media/matthew/backup/balrog
         - ssh://rl1huyxi@rl1huyxi.repo.borgbase.com/./repo
 
