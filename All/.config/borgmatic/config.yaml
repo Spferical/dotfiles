@@ -21,6 +21,7 @@ location:
     # patterns" for more details.
     exclude_patterns:
         - /home/matthew/.cache
+        - .cache
         # Lots of electron caches
         - '/home/matthew/.config/*/Cache'
         - "/home/matthew/dev/*/target/rls"
@@ -30,6 +31,7 @@ location:
         - "*.pyc"
         - /home/matthew/.var/app/
         - /home/matthew/.local/share/Steam/
+        - /home/matthew/.local/share/containers/
         - /home/matthew/Games/
         - /home/matthew/Downloads
         - /home/matthew/.PyCharm2016.1
