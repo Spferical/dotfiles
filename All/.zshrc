@@ -188,3 +188,5 @@ fzf-zoxide-dir-widget() {
 }
 zle -N fzf-zoxide-dir-widget
 bindkey '^Z' fzf-zoxide-dir-widget
+
+alias erl='cd ~/dev/games/everythingrl && nix develop --command zsh'
