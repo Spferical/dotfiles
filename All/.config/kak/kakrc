@@ -121,6 +121,7 @@ define-command -hidden format-with-black %{ execute-keys -draft '%<|>black -<ret
 map global user B ": format-with-black<ret>" -docstring 'format with Black'
 
 map global user E ': lsp find-error<ret>' -docstring 'Jump to LSP error'
+map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
 
 remove-hooks global lsp-filetype-python
 hook -group lsp-filetype-python global BufSetOption filetype=python %{
