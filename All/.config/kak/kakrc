@@ -126,7 +126,7 @@ map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
 remove-hooks global lsp-filetype-python
 hook -group lsp-filetype-python global BufSetOption filetype=python %{
     set-option buffer lsp_servers "
-        [pyright-langserver]
+        [basedpyright-langserver]
         root = ""%sh{eval ""$kak_opt_lsp_find_root"" requirements.txt setup.py pyproject.toml .git .hg $(: kak_buffile)}""
         settings_section = ""_""
         args = [""--stdio""]
